@@ -484,6 +484,92 @@
         margin-top: 8px;
       }
     }
+
+    .research-img {
+      width: 100%;
+      max-width: 180px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 1px 8px rgba(124,58,237,0.10);
+      margin-bottom: 14px;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 36px;
+      justify-items: center;
+      margin-top: 24px;
+    }
+
+    .research-box {
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,0.03));
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(2,6,23,0.5);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .research-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 24px rgba(6,182,212,0.3);
+    }
+
+    .research-img {
+      width: 100%;
+      max-width: 400px;
+      height: 220px;
+      object-fit: cover;
+      object-position: left center; /* <-- Qui: immagine coperta da destra verso sinistra */
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(6,182,212,0.2);
+      margin-bottom: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, object-position 0.3s ease;
+    }
+
+    /* Piccolo effetto “riscaldamento” dinamico all’hover */
+    .research-box:hover .research-img {
+      transform: scale(1.05);
+      object-position: right center; /* si sposta leggermente verso sinistra al passaggio del mouse */
+      box-shadow: 0 6px 18px rgba(6,182,212,0.3);
+    }
+
+
+    .research-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #06b6d4;
+      margin-top: 4px;
+      margin-bottom: 0;
+      letter-spacing: 0.4px;
+    }
+
+    /* Layout per schermi piccoli */
+    @media (max-width: 700px) {
+      .research-box {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        padding: 12px 14px;
+        gap: 16px;
+      }
+
+      .research-img {
+        width: 80%;
+        height: auto;
+        margin-bottom: 0;
+      }
+
+      .research-title {
+        font-size: 17px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -580,13 +666,23 @@
         </section>
 
         <section id="research">
-          <!--<h2>Research &amp; Employment</h2>-->
           <h2>Research Interests</h2>
-          <div class="card">
-            <h3>Cardiac Modeling</h3>
-            <p class="small">Modeling cardiac tissue, ionic models for hiPSC-CMs, numerical methods &amp; machine learning for regenerative medicine. Based in Lugano, Switzerland.</p>
+          <div class="research-grid">
+            <div class="research-box">
+              <img src="./assets/AL.png" alt="Ionic models for hiPSC-CMs" class="research-img">
+              <div class="research-title">Ionic models for hiPSC-CMs</div>
+            </div>
+            <div class="research-box">
+              <img src="./assets/MEA.png" alt="Cardiac electrophysiology" class="research-img">
+              <div class="research-title">Cardiac electrophysiology</div>
+            </div>
+            <div class="research-box">
+              <img src="./assets/IGA.png" alt="Engineered heart tissue modeling" class="research-img">
+              <div class="research-title">Engineered heart tissue modeling</div>
+            </div>
           </div>
         </section>
+
 
         <section id="Publications">
           <h2>Publications</h2>
