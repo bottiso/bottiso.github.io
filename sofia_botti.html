@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sofia Botti — Computational Mathematics & Cardiac Modeling</title>
+  <meta name="description" content="Sofia Botti — Postdoctoral Researcher in Computational Mathematics. Modeling of cardiac tissue, ionic models, and deep learning tools for regenerative medicine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fraunces:opsz,wght@8..144,700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0f172a">
+  <style>
+    :root{
+      --bg:#070816; --card:#0b1220; --muted:#98a0b3; --accent1:#7c3aed; --accent2:#06b6d4; --glass: rgba(255,255,255,0.04);
+      --radius:14px; --maxw:1100px; --content-pad:28px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    /*body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,helvetica,Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent), radial-gradient(900px 400px at 90% 90%, rgba(6,182,212,0.04), transparent), var(--bg); color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,helvetica,Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent), radial-gradient(900px 400px at 90% 90%, rgba(124,58,237,0.08), transparent), var(--bg); color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }*/
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Segoe UI, Roboto, helvetica, Arial;
+      background: rgb(9, 1, 31); /* sfondo tinta unita */
+      color: #e6eef8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+    }
+    .wrap{max-width:var(--maxw); margin:24px auto; padding:20px 42px 0 42px}
+    .header{display:flex;align-items:center;gap:20px}
+    .avatar{width:550px;height:550px;border-radius:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;font-family:Fraunces,serif;color:white;font-size:50;box-shadow:0 8px 30px rgba(2,6,23,.6)}
+    .hero{display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:12px;text-align:center}
+    h1{margin-left:auto;margin-right:auto;font-family:Fraunces,serif;font-weight:700;font-size:35px;text-align:center}
+    p.lead{margin:0;color:var(--muted);font-size:20px}
+    .position{font-size:20px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:8px}
+
+    .controls{margin-left:auto;display:flex;gap:8px}
+    .btn{background:linear-gradient(90deg,rgba(255,255,255,0.04),transparent);border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:inherit;font-weight:600;cursor:pointer}
+    .grid{display:block;margin-top:26px}
+    .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.02));padding:var(--content-pad);border-radius:var(--radius);box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+
+    /* left content */
+    .section{margin-bottom:18px}
+    .section h2{margin:0 0 8px 0;font-size:25}
+    .muted{color:var(--muted);font-size:18px}
+    .timeline{display:flex;flex-direction:column;gap:12px}
+    .item{display:grid;grid-template-columns:180px 2fr;gap:12px}
+    .item .when{color:var(--muted);font-size:18px}
+    .role{font-weight:800;font-size:18px}
+    .small{font-size:15px;color:#cfe6ff}
+
+    /* right column quick info */
+    /*.meta-list{display:flex;flex-direction:column;gap:12px}
+    .meta{display:flex;gap:10px;align-items:center}
+    .meta b{min-width:85px;color:#fff}
+    .pill{padding:6px 8px;border-radius:10px;background:var(--glass);display:inline-block;font-size:13px}
+    
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:8px;font-size:13px}
+    */
+    footer {
+      width: 100%;
+      border-bottom: none;
+      border-top: 2px solid var(--accent2); /* bordo in alto del footer */
+      margin-top: 40px;
+      padding-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* responsive 
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .controls{display:none}
+    }
+    */
+
+    /* subtle animated underline for links */
+    a.link{color:inherit;text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
+    a.link:hover{border-bottom-color:var(--accent2)}
+
+    /* timeline bar */
+    .timeline::before{content:'';width:2px;background:linear-gradient(180deg,var(--accent1),var(--accent2));position:relative;left:54px;top:0;height:100%;display:block}
+    .item{position:relative;padding-left:15px}
+    .item::before{content:none !important}
+
+    /* fancy hero badge */
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,rgba(124,58,237,0.12),transparent);font-weight:700;font-size:13px}
+
+    /* download button */
+    .cta{display:inline-flex;gap:10px;align-items:center;padding:12px 16px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:white;font-weight:700;cursor:pointer}
+
+    /* small utilities */
+    .contact-icons{display:flex;gap:10px;align-items:center}
+    .icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.03);display:inline-flex;align-items:center;justify-content:center}
+
+    .top-header {
+      width: 100%;
+      background: var(--bg);
+      box-shadow: 0 2px 12px rgba(2, 6, 23, 0.10);
+      margin-bottom: 5pt;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: right;
+      justify-content: space-between; /* separa links e icone */
+      padding: 15px 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-link {
+      color: #fff;
+      font-weight: 400;
+      text-decoration: none;
+      font-size: 15px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: right;
+      gap: 18px;
+      margin-left: auto; /* spinge le icone a destra */
+      justify-content: flex-end; /* le tiene allineate a destra */
+    }
+
+    .nav-icons img {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .pub-card {
+      background: linear-gradient(90deg, var(--card), rgba(6,182,212,0.08));
+      border-radius: 12px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pub-icon {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: transparent; 
+      box-shadow: 0 1px 6px rgba(2,6,23,0.08);
+      margin-top: 15px;
+    }
+    .pub-title {
+      font-weight: 400;
+      font-size: 16px;
+      color: #fff;
+    }
+    .pub-authors {
+      margin-top: 2px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+    
+    .pub-link {
+      align-self: flex-start;
+      margin-top: 2px;
+      font-size: 15px;
+      color: #0586b6;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+    .pub-link:hover {
+      margin-top: 2px;
+      color: #06b6d4;
+    }
+
+    .pub-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+      margin-top: 0px;
+    }
+    .pub-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: transparent; /*(90deg, var(--card), rgba(6,182,212,0.08));*/
+      border-radius: 10px;
+      padding: 2px 2px;
+      box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+    }
+    .pub-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .pub-link {
+      margin-top: 2px;
+    }
+
+    .pub-info > div {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .pub-journal {
+      font-size: 15px;
+      color: #06b6d4;
+      margin-top: 0;
+      white-space: nowrap;
+    }
+    
+    .pub-link {
+      margin-top: 0; /* rimuovi margine verticale */
+      white-space: nowrap; /* evita che il testo vada a capo */
+    }
+
+    .pdf-btn {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 8px;
+      background: transparent; /*(255,255,255,0.08);*/
+      color: #06b6d4;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      border: none; /*0.5px solid #06b6d4;*/
+      transition: background 0.2s;
+      margin-left: 0;
+    }
+    .pdf-btn:hover {
+      background: rgba(6,182,212,0.18);
+      color: #fff;
+    }
+ 
+    .teaching-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .teaching-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .teaching-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .teaching-details {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .teaching-year, .teaching-course, .teaching-type, .teaching-univ {
+      font-size: 16px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .teaching-course {
+      font-weight: 700;
+      color: #fff;
+    }
+    .teaching-type {
+      color: #0586b6;
+    }
+
+    section {
+      margin-top: 60px;
+      margin-bottom: 48px;
+    }
+
+    .contacts-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .contacts-col {
+      flex: 1;
+    }
+
+    .contacts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contacts-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .contacts-address {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .contacts-list a {
+      color: var(--muted) !important;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .contacts-list a:hover {
+      color: var(--muted) !important;
+      text-decoration: underline;
+    }
+
+    .hero-header {
+      display: flex;
+      align-items: center;
+      gap: 100px; /* aumenta lo spazio tra foto e testo */
+      margin-bottom: 32px;
+    }
+
+    .hero-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* centra verticalmente */
+      gap: 5px; /* aumenta lo spazio tra le righe */
+      align-items: flex-start;
+      min-width: 320px;
+      font-size: 20px;
+    }
+
+    .hero-info h1 {
+      margin: 0;
+      font-size: 2.5em; /* più grande */
+      font-family: Fraunces, serif;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .hero-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: none; /*4px solid #06b6d4;*/
+      object-fit: cover;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(6,182,212,0.12);
+    }
+    .hero-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .hero-links a img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--bg);
+      transition: box-shadow 0.2s;
+    }
+    .hero-links a img:hover {
+      box-shadow: 0 0 0 2px #06b6d4;
+    }
+
+    @media (max-width: 700px) {
+      .wrap {
+        padding: 10px 8px 0 8px;
+        max-width: 100vw;
+      }
+      .hero-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        text-align: center;
+      }
+      .hero-info {
+        align-items: center;
+        min-width: unset;
+        gap: 10px;
+      }
+      .hero-info h1 {
+        font-size: 2em;
+      }
+      .contacts-columns {
+        flex-direction: column;
+        gap: 18px;
+      }
+      .contacts-col {
+        min-width: unset;
+      }
+      .pub-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 8px 4px;
+      }
+      .pub-icon {
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <nav class="nav-bar">
+      <div class="nav-links">
+        <!--<a class="nav-link" href="#about">About</a>-->
+        <a class="nav-link" href="research">Research</a>
+        <a class="nav-link" href="#publications">Publications</a>
+        <a class="nav-link" href="#teaching">Teaching</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="nav-link" href="cv.html" target="_blank">Curriculum</a>
+      </div>
+      <div class="nav-icons">
+        <a href="mailto:bottiso@usi.ch" title="Email">
+          <img src="/assets/mail.png" alt="Email" style="height:22px;width:27px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://www.researchgate.net/profile/Sofia-Botti-2?ev=hdr_xprf" target="_blank" title="ResearchGate">
+          <img src="/assets/researchgate.png" alt="LinkedIn" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://github.com/bottiso" target="_blank" title="GitHub">
+          <img src="/assets/github.png" alt="LinkedIn" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://www.linkedin.com/in/sofia-botti-594570280" target="_blank" title="LinkedIn">
+          <img src="/assets/linkedin.png" alt="LinkedIn" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://scholar.google.com/citations?user=hcpBatQAAAAJ&hl=it" target="_blank" title="Google Scholar">
+          <img src="/assets/scholar.png" alt="Scholar" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://orcid.org/0000-0002-7271-6943" target="_blank" title="ORCID">
+          <img src="/assets/orcid.png" alt="ORCID" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="/documents/CV.pdf" target="_blank" title="CV">
+          <img src="/assets/cv.png" alt="CV" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+      </div>
+    </nav>
+  </header>
+  <div class="wrap">
+    <header class="hero-header">
+      <img src="/assets/avatar.jpg" alt="Sofia Botti" class="hero-img">
+      <div class="hero-info">
+        <h1>Sofia Botti</h1>
+        <div class="hero-role">Postdoctoral Researcher</div>
+        <div class="hero-inst">Euler Institute, Università della Svizzera Italiana</div>
+        <div class="hero-links">
+          <a href="mailto:bottiso@usi.ch" title="Email">
+            <img src="/assets/mail.png" alt="Email">
+          </a>
+          <a href="https://www.linkedin.com/in/sofia-botti-594570280" target="_blank" title="LinkedIn">
+            <img src="/assets/linkedin.png" alt="LinkedIn">
+          </a>
+          <a href="https://github.com/bottiso" target="_blank" title="GitHub">
+            <img src="/assets/github.png" alt="GitHub">
+          </a>
+          <a href="https://scholar.google.com/citations?user=hcpBatQAAAAJ&hl=it" target="_blank" title="Google Scholar">
+            <img src="/assets/scholar.png" alt="Scholar">
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <!--<section id="about" >
+          <h2>About</h2>
+          <p class="small">Modeling cardiac tissue, ionic models for hiPSC-CMs, numerical methods &amp; machine learning for regenerative medicine. Based in Lugano, Switzerland.
+            I develop multi-scale mathematical and numerical models for cardiac tissue that connect ionic currents at the single-cell level to 3D ventricle simulations. My work combines PDE/ODE modeling, high-performance computing and machine learning to advance precision cardiology and regenerative medicine.</p>
+        </section>-->
+
+        <section>
+          <!--<h2>Research &amp; Employment</h2>-->
+          <h2>Current and Previous Positions</h2>
+          <div class="timeline">
+            <div class="item">
+              <div class="when">11/2023 — present</div>
+              <div>
+                <div class="role">Postdoctoral Researcher — Università della Svizzera Italiana</div>
+                <div class="small">SNSF Postdoctoral Fellowship (PI) - Grant number: 217025</div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="when">11/2022 — 10/2023</div>
+              <div>
+                <div class="role">Postdoc Assistant — University of Pavia &amp; Università della Svizzera Italiana</div>
+                <div class="small">Joint position across Pavia and Lugano</div>
+                <div class="small">Under H2020-EuroHPC Microcard project - Grant agreement ID: 955495. </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section id="research">
+          <!--<h2>Research &amp; Employment</h2>-->
+          <h2>Research Interests</h2>
+          <div class="card">
+            <h3>Cardiac Modeling</h3>
+            <p class="small">Modeling cardiac tissue, ionic models for hiPSC-CMs, numerical methods &amp; machine learning for regenerative medicine. Based in Lugano, Switzerland.</p>
+          </div>
+        </section>
+
+        <section id="Publications">
+          <h2>Publications</h2>
+          <h3>Journal Articles</h3>
+          <div class="pub-table">
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">In silico modelling of multi-electrode arrays for enhancing cardiac drug testing on hiPSC-CM heterogeneous tissues</div>
+                <div class="pub-authors">S. Botti, R. Krause, L.F. Pavarino</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">Journal of Physiology, 2025</span>
+                  <a class="pdf-btn" href="https://arxiv.org/abs/1234.5678" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/JP2025.pdf" target="_blank">PDF</a>
+                </div>        
+              </div>
+            </div>
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">A novel ionic model for matured and paced atrial-like hiPSC-CMs integrating IKur and IKCa currents</div>
+                <div class="pub-authors">S. Botti, C. Bartolucci, C. Altomare, M. Paci, L. Barile, R. Krause, L.F. Pavarino, S. Severi</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">Computers in Biology and Medicine, 2024</span>
+                  <a class="pdf-btn" href="https://www.sciencedirect.com/science/article/pii/S0010482524009843?via%3Dihub#d1e8624" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/AL2024.pdf" target="_blank">PDF</a>
+                </div>
+              </div>
+            </div>
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">Isogeometric simulation of a derived stem cell engineered ventricle</div>
+                <div class="pub-authors">S. Botti, M. Torre</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">Advances in Computational Science and Engineering, 2023</span>
+                  <a class="pdf-btn" href="https://www.aimsciences.org/article/doi/10.3934/acse.2023013" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/IGA2023.pdf" target="_blank">PDF</a>
+                </div>
+              </div>
+            </div>
+            <!-- Altre pubblicazioni -->
+          </div>
+          <h3>Conference Proceedings and Book Chapter</h3>
+          <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">Advanced Bidomain Framework for Drug Testing in Heterogeneous Cardiac hiPSC Tissues</div>
+                <div class="pub-authors">S. Botti, R. Krause, L.F. Pavarino</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal"> Cardiovascular Modeling, in Springer INdAM series <em>Accepted paper</em></span>
+                </div>
+                <!--<div class="pub-journal">Advances in Computational Science and Engineering, 2023</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <a class="pub-link" href="https://www.aimsciences.org/article/doi/10.3934/acse.2023013" target="_blank">DOI: 10.3934/acse.2023013</a>
+                  <a class="pub-link" href="/documents/IGA2023.pdf" target="_blank">PDF version</a>
+                </div>-->
+              </div>
+            </div>
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">An in silico Study of Cardiac hiPSC Electronic Maturation by Dynamic Clamp</div>
+                <div class="pub-authors">S. Botti, C. Bartolucci, R. Krause, L.F. Pavarino, S. Severi</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">Functional Imaging and Modeling of the Heart, 2023</span>
+                  <a class="pdf-btn" href="https://link.springer.com/chapter/10.1007/978-3-031-35302-4_18" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/FIMH2023.pdf" target="_blank">PDF</a>
+                </div>
+                </div>
+            </div>
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">Numerical Simulations Indicate IK1 Dynamic Clamp Can Unveil the Phenotype of Cardiomyocytes Derived from Induced Pluripotent Stem Cells</div>
+                <div class="pub-authors">S. Botti, C. Bartolucci, C. Altomare, L. Barile, R. Krause, L.F. Pavarino, S. Severi</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">Computing in Cardiology, 2022</span>
+                  <a class="pdf-btn" href="https://ieeexplore.ieee.org/document/10081686" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/CinC2022.pdf" target="_blank">PDF</a>
+                </div>
+              </div>
+            </div>
+
+          <h3>Arxiv Preprints</h3>
+          <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">A novel ionic model for matured and paced atrial-like hiPSC-CMs integrating IKur and IKCa currents</div>
+                <div class="pub-authors">S. Botti, C. Bartolucci, C. Altomare, L. Barile, R. Krause, L.F. Pavarino, S. Severi</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">bioRxiv preprint</span>
+                  <a class="pdf-btn" href="https://www.biorxiv.org/content/10.1101/2024.01.12.574782v1" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/bioRxiv.pdf" target="_blank">PDF</a>
+                </div>
+              </div>
+            </div>
+          <div>
+          <h3>PhD Thesis</h3>
+          <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">Mathematical modeling of Human Induced Pluripotent Stem Cell-Derived Cardiomyocytes (hiPSC-CMs): from ionic currents to 3D ventricle models</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">S. Botti</span>
+                  <a class="pdf-btn" href="https://iris.unipv.it/handle/11571/1467309" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/Botti_tesi.pdf" target="_blank">PDF</a>
+                </div>
+              </div>
+            </div>
+        </section>
+
+        <section id="teaching">
+          <h2>Teaching Activities</h2>
+          <h3>Lecturer</h2>
+          <ul class="teaching-list">
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
+                <span class="teaching-year">08/2025–01/2026</span>
+                <span class="teaching-course">Algorithmics</span>
+                <span class="teaching-type">(BSc)</span>
+                <span class="teaching-univ">FernUni-Unidistance, Brig, Switzerland</span>
+              </div>
+            </li>
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
+                <span class="teaching-year">06/2025</span>
+                <span class="teaching-course">Modeling the electrophysiology of the cardiac tissue</span>
+                <span class="teaching-type">Ph.D. Summer School</span>
+              </div>
+            </li>
+            <h3>Teaching Assistant</h2>
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
+                <span class="teaching-year">10/2022–01/2023</span>
+                <span class="teaching-course">Sistemi dinamici</span>
+                <span class="teaching-type">(MSc)</span>
+                <span class="teaching-univ">Università degli Studi di Pavia</span>
+                
+              </div>
+            </li>
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
+                <span class="teaching-year">10/2022–01/2023</span>
+                <span class="teaching-course">Analisi 1</span>
+                <span class="teaching-type">(BSc)</span>
+                <span class="teaching-univ">Università degli Studi di Pavia</span>
+              </div>
+            </li>
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
+                <span class="teaching-year">10/2021–01/2022</span>
+                <span class="teaching-course">Analisi 1</span>
+                <span class="teaching-type">(BSc)</span>
+                <span class="teaching-univ">Università degli Studi di Pavia</span>
+              </div>
+            </li>
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
+                <span class="teaching-year">12/2020–02/2021</span>
+                <span class="teaching-course">Analisi 1 - Didactic seminars</span>
+                <span class="teaching-type">(BSc)</span>
+                <span class="teaching-univ">Università degli Studi di Pavia</span>
+              </div>
+            </li>
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
+                <span class="teaching-year">11/2020–12/2020</span>
+                <span class="teaching-course">Mathematics - Precourse</span>
+                <span class="teaching-type">Precours</span>
+                <span class="teaching-univ">Università degli Studi di Pavia</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section id="contact">
+          <h2>Contacts</h2>
+          <div class="contacts-columns">
+            <div class="contacts-col">
+              <ul class="contacts-list">
+                <li>
+                  <img src="/assets/mail.png" alt="Email" style="width:22px;height:22px;color: var(--muted);">
+                  <a href="mailto:bottiso@usi.ch">bottiso@usi.ch</a>
+                </li>
+                <li>
+                  <img src="/assets/linkedin.png" alt="LinkedIn" style="width:22px;height:22px;color: var(--muted);">
+                  <a href="https://www.linkedin.com/in/sofia-botti-594570280" target="_blank">LinkedIn: Sofia Botti</a>
+                </li>
+                <li>
+                  <img src="/assets/github.png" alt="GitHub" style="width:22px;height:22px;color: var(--muted);">
+                  <a href="https://github.com/bottiso" target="_blank">GitHub: bottiso</a>
+                </li>
+                <li>
+                  <img src="/assets/scholar.png" alt="Scholar" style="width:22px;height:22px;">
+                  <a href="https://scholar.google.com/citations?user=hcpBatQAAAAJ&hl=it" target="_blank">Google Scholar</a>
+                </li>
+              </ul>
+            </div>
+            <div class="contacts-col">
+              <div style="display: flex; align-items: flex-start; gap: 50px;">
+                <img src="/assets/posizione.png" alt="Location" style="width:35px;height:35px;margin-top:2px;">
+                <div class="contacts-address">
+                  Euler Institute,<br>
+                  Via La Santa 1,<br>
+                  6962 Viganello, Lugano, Switzerland<br>
+                  Room D5.13, fifth floor
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  
+
+  <script>
+    function downloadCV(){
+      // placeholder: swap the href to the real CV file in your repo, e.g. /assets/Sofia_Botti_CV.pdf
+      const link = document.createElement('a');
+      link.href = '/assets/Sofia_Botti_CV.pdf';
+      link.download = 'Sofia_Botti_CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+
+    // small progressive enhancement: copy email on click
+    document.querySelectorAll('.pill a[href^="mailto:"]').forEach(a=>{
+      a.addEventListener('click',()=>{
+        try{navigator.clipboard && navigator.clipboard.writeText(a.href.replace('mailto:',''))}catch(e){}
+      })
+    })
+  </script>
+
+  <footer>
+    © 2025 Sofia Botti, PhD
+  </footer>
+
+</body>
+</html>
