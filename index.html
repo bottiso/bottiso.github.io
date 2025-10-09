@@ -390,6 +390,48 @@
       box-shadow: 0 0 0 2px #06b6d4;
     }
 
+    /* Hamburger menu base */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    @media (max-width: 700px) {
+      .nav-bar {
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px 8px;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        background: var(--card);
+        width: 100vw;
+        flex-direction: column;
+        gap: 0;
+        z-index: 100;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .nav-icons {
+        display: none !important;
+      }
+    }
+
     @media (max-width: 700px) {
       .wrap {
         padding: 10px 8px 0 8px;
@@ -455,6 +497,7 @@
         <a class="nav-link" href="#contact">Contact</a>
         <a class="nav-link" href="cv.html" target="_blank">Curriculum</a>
       </div>
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
       <div class="nav-icons">
         <a href="mailto:bottiso@usi.ch" title="Email">
           <img src="/assets/mail.png" alt="Email" style="height:22px;width:27px;vertical-align:middle;border-radius:4px;">
@@ -663,7 +706,7 @@
             <li class="teaching-item">
               <img class="teaching-icon" src="/assets/accademia.png" alt="">
               <div class="teaching-details">
-                <span class="teaching-year">08/2025–01/2026</span>
+                <span class="teaching-year">08/2025 – 01/2026</span>
                 <span class="teaching-course">Algorithmics</span>
                 <span class="teaching-type">(BSc)</span>
                 <span class="teaching-univ">FernUni-Unidistance, Brig, Switzerland</span>
@@ -681,7 +724,7 @@
             <li class="teaching-item">
               <img class="teaching-icon" src="/assets/accademia.png" alt="">
               <div class="teaching-details">
-                <span class="teaching-year">10/2022–01/2023</span>
+                <span class="teaching-year">10/2022 – 01/2023</span>
                 <span class="teaching-course">Sistemi dinamici</span>
                 <span class="teaching-type">(MSc)</span>
                 <span class="teaching-univ">Università degli Studi di Pavia</span>
@@ -691,7 +734,7 @@
             <li class="teaching-item">
               <img class="teaching-icon" src="/assets/accademia.png" alt="">
               <div class="teaching-details">
-                <span class="teaching-year">10/2022–01/2023</span>
+                <span class="teaching-year">10/2022 – 01/2023</span>
                 <span class="teaching-course">Analisi 1</span>
                 <span class="teaching-type">(BSc)</span>
                 <span class="teaching-univ">Università degli Studi di Pavia</span>
@@ -700,7 +743,7 @@
             <li class="teaching-item">
               <img class="teaching-icon" src="/assets/accademia.png" alt="">
               <div class="teaching-details">
-                <span class="teaching-year">10/2021–01/2022</span>
+                <span class="teaching-year">10/2021 – 01/2022</span>
                 <span class="teaching-course">Analisi 1</span>
                 <span class="teaching-type">(BSc)</span>
                 <span class="teaching-univ">Università degli Studi di Pavia</span>
@@ -709,7 +752,7 @@
             <li class="teaching-item">
               <img class="teaching-icon" src="/assets/accademia.png" alt="">
               <div class="teaching-details">
-                <span class="teaching-year">12/2020–02/2021</span>
+                <span class="teaching-year">12/2020 – 02/2021</span>
                 <span class="teaching-course">Analisi 1 - Didactic seminars</span>
                 <span class="teaching-type">(BSc)</span>
                 <span class="teaching-univ">Università degli Studi di Pavia</span>
@@ -718,7 +761,7 @@
             <li class="teaching-item">
               <img class="teaching-icon" src="/assets/accademia.png" alt="">
               <div class="teaching-details">
-                <span class="teaching-year">11/2020–12/2020</span>
+                <span class="teaching-year">11/2020 – 12/2020</span>
                 <span class="teaching-course">Mathematics - Precourse</span>
                 <span class="teaching-type">Precours</span>
                 <span class="teaching-univ">Università degli Studi di Pavia</span>
