@@ -258,6 +258,72 @@
       background: rgba(6,182,212,0.18);
       color: #fff;
     }
+
+    .edu-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+    }
+
+    .edu-row {
+    display: flex;
+    align-items: center; /* cambia da flex-start a center per centrare verticalmente l'immagine */
+    gap: 18px;
+    background: transparent;
+    border-radius: 10px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+    }
+
+    .edu-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    }
+
+    /* ---- Qui puoi modificare liberamente la dimensione ---- */
+    .pub-icon {
+    width: 50px;   /* ← cambia qui la dimensione */
+    height: 50px;  /* ← idem */
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: transparent; 
+    box-shadow: 0 1px 6px rgba(2,6,23,0.08);
+    object-fit: contain; /* fa sì che l'immagine si adatti senza deformarsi */
+    margin-top: 0; /* rimuoviamo offset verticale */
+    }
+
+    .edu-year {
+    font-weight: 600;
+    font-size: 15px;
+    color: #06b6d4;
+    line-height: 1.2;
+    }
+
+    .edu-degree {
+    font-weight: 800;
+    font-size: 16px;
+    color: #fff;
+    }
+
+    .edu-institution {
+    font-size: 14px;
+    line-height: 1.2;
+    }
+
+    .edu-thesis,
+    .edu-advisor {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.2;
+    }
+
+    .edu-thesis {
+    font-style: italic;
+    }
+
+
  
     .teaching-list {
       list-style: none;
@@ -350,15 +416,15 @@
       display: flex;
       flex-direction: column;
       justify-content: center; /* centra verticalmente */
-      gap: 0px; /* aumenta lo spazio tra le righe */
+      gap: 5px; /* aumenta lo spazio tra le righe */
       align-items: flex-start;
       min-width: 320px;
-      font-size: 18px;
+      font-size: 20px;
     }
 
     .hero-info h1 {
       margin: 0;
-      font-size: 2.2em; /* più grande */
+      font-size: 2.5em; /* più grande */
       font-family: Fraunces, serif;
       color: #fff;
       font-weight: 700;
@@ -465,8 +531,14 @@
         padding: 8px 4px;
       }
       .pub-icon {
-        margin-top: 0;
-      }
+        width: 50px;   /* aumenta da 28px o 30px a 40px */
+        height: 50px;
+        flex-shrink: 0;
+        border-radius: 8px;
+        background: transparent;
+        box-shadow: 0 1px 6px rgba(2,6,23,0.08);
+        margin-top: 4px; /* puoi regolare questo per centrare meglio verticalmente */
+        }
       .nav-bar {
         flex-direction: column;
         align-items: flex-start;
@@ -571,7 +643,7 @@
       letter-spacing: 0.4px;
     }
 
-    /* Layout per schermi piccoli 
+    /* Layout per schermi piccoli */
     @media (max-width: 700px) {
       .research-box {
         flex-direction: row;
@@ -590,7 +662,7 @@
       .research-title {
         font-size: 17px;
       }
-    }*/
+    }
 
     @media (max-width: 700px) {
       .item .when {
@@ -602,6 +674,67 @@
       .item {
         grid-template-columns: 100px 1fr;
       }
+    }
+
+
+    #Fundings {
+    margin-top: 24px;
+    }
+
+    .funding-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: linear-gradient(90deg, var(--card), rgba(6,182,212,0.08));
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+    }
+
+    .funding-text1 {
+    flex: 1; /* occupa la maggior parte della card */
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.4;
+    font-weight:1000;
+    }
+    .funding-text2 {
+    flex: 1; /* occupa la maggior parte della card */
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.4;
+    font-style: italic;
+    }
+    .funding-text3 {
+    flex: 1; /* occupa la maggior parte della card */
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.4;
+    }
+
+    .funding-logo img {
+    width: 250px; /* dimensione logo */
+    height: auto;
+    border-radius: 6px;
+    }
+    /* contenitore del testo */
+    .funding-info {
+    display: flex;
+    flex-direction: column; /* testo uno sotto l’altro */
+    flex: 1;
+    gap: 4px;
+    }
+
+    /* --- Responsive: nascondi logo su schermi piccoli --- */
+    @media (max-width: 768px) {
+    .funding-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .funding-logo {
+        display: none;
+    }
     }
 
     .cv-download {
@@ -637,9 +770,9 @@
     }
 
 
+
   </style>
 
-  
 
 
 <script>
@@ -657,11 +790,10 @@
     <nav class="nav-bar">
       <div class="nav-links">
         <!--<a class="nav-link" href="#about">About</a>-->
-        <a class="nav-link" href="research">Research</a>
-        <a class="nav-link" href="#publications">Publications</a>
+        <a class="nav-link" href="index.html" target="_blank">Home</a>
+        <a class="nav-link" href="#education">Education</a>
+        <a class="nav-link" href="#funding">Funding</a>
         <a class="nav-link" href="#teaching">Teaching</a>
-        <a class="nav-link" href="#contact">Contact</a>
-        <a class="nav-link" href="cv.html" target="_blank">Curriculum</a>
       </div>
       <button class="menu-toggle" aria-label="Toggle menu">☰</button>
       <div class="nav-icons">
@@ -689,35 +821,25 @@
       </div>
     </nav>
   </header>
+  
+  
   <div class="wrap">
     <header class="hero-header">
-      <img src="/assets/avatar.jpg" alt="Sofia Botti" class="hero-img">
-      <div class="hero-info">
+    <img src="/assets/avatar.jpg" alt="Sofia Botti" class="hero-img">
+    <div class="hero-info">
         <h1>Sofia Botti</h1>
-        <div class="hero-role">Postdoctoral Researcher</div>
-        <div class="hero-inst">Euler Institute, Università della Svizzera Italiana</div>
-        <div class="hero-links">
-          <a href="mailto:bottiso@usi.ch" title="Email">
-            <img src="/assets/mail.png" alt="Email">
-          </a>
-          <a href="https://www.linkedin.com/in/sofia-botti-594570280" target="_blank" title="LinkedIn">
-            <img src="/assets/linkedin.png" alt="LinkedIn">
-          </a>
-          <a href="https://github.com/bottiso" target="_blank" title="GitHub">
-            <img src="/assets/github.png" alt="GitHub">
-          </a>
-          <a href="https://scholar.google.com/citations?user=hcpBatQAAAAJ&hl=it" target="_blank" title="Google Scholar">
-            <img src="/assets/scholar.png" alt="Scholar">
-          </a>
-        </div>
+        <div class="hero-role">Curriculum Vitae</div>
+
         <div class="cv-download">
-          <a href="/documents/CV.pdf" class="cv-btn" download>
-          Download CV
-          </a>
+        <a href="/documents/CV.pdf" class="cv-btn" download>
+            Download CV
+        </a>
         </div>
 
-      </div>
+        <div class="hero-links"></div>
+    </div>
     </header>
+
 
     <div class="grid">
       <main>
@@ -748,139 +870,77 @@
               </div>
             </div>
           </div>
-
-
-        </section>
-
-        <section id="research">
-          <h2>Research Interests</h2>
-          <div class="research-grid">
-            <div class="research-box">
-              <img src="./assets/AL.png" alt="Ionic models for hiPSC-CMs" class="research-img">
-              <div class="research-title">Ionic models for hiPSC-CMs</div>
-            </div>
-            <div class="research-box">
-              <img src="./assets/MEA.png" alt="Cardiac electrophysiology" class="research-img">
-              <div class="research-title">Cardiac electrophysiology</div>
-            </div>
-            <div class="research-box">
-              <img src="./assets/IGA.png" alt="Engineered heart tissue modeling" class="research-img">
-              <div class="research-title">Engineered heart tissue modeling</div>
-            </div>
-          </div>
         </section>
 
 
-        <section id="Publications">
-          <h2>Publications</h2>
-          <h3>Journal Articles</h3>
-          <div class="pub-table">
-            <div class="pub-row">
-              <img class="pub-icon" src="/assets/article.png" alt="Article">
-              <div class="pub-info">
-                <div class="pub-title">In silico modelling of multi-electrode arrays for enhancing cardiac drug testing on hiPSC-CM heterogeneous tissues</div>
-                <div class="pub-authors">S. Botti, R. Krause, L.F. Pavarino</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal">Journal of Physiology, 2025</span>
-                  <a class="pdf-btn" href="https://arxiv.org/abs/1234.5678" target="_blank">DOI</a>
-                  <a class="pdf-btn" href="/documents/JP2025.pdf" target="_blank">PDF</a>
-                </div>        
-              </div>
+        <section id="education">
+        <h2>Education</h2>
+        <div class="edu-table">
+            <div class="edu-row">
+            <img class="pub-icon" src="/assets/tocco.png" alt="Degree">
+            <div class="edu-info">
+                <div class="edu-year">November 2022</div>
+                <div class="edu-degree">Ph.D. in Computational Mathematics and Decision Sciences</div>
+                <div class="edu-institution">Joint PhD Program University of Pavia & Università della Svizzera Italiana</div>
+                <div class="edu-thesis">Thesis: Mathematical modeling of hiPSC-CMs from ionic currents to 3D ventricle models</div>
+                <div class="edu-advisor">Advisor: Prof. Luca F. Pavarino</div>
             </div>
-            <div class="pub-row">
-              <img class="pub-icon" src="/assets/article.png" alt="Article">
-              <div class="pub-info">
-                <div class="pub-title">A novel ionic model for matured and paced atrial-like hiPSC-CMs integrating IKur and IKCa currents</div>
-                <div class="pub-authors">S. Botti, C. Bartolucci, C. Altomare, M. Paci, L. Barile, R. Krause, L.F. Pavarino, S. Severi</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal">Computers in Biology and Medicine, 2024</span>
-                  <a class="pdf-btn" href="https://www.sciencedirect.com/science/article/pii/S0010482524009843?via%3Dihub#d1e8624" target="_blank">DOI</a>
-                  <a class="pdf-btn" href="/documents/AL2024.pdf" target="_blank">PDF</a>
-                </div>
-              </div>
             </div>
-            <div class="pub-row">
-              <img class="pub-icon" src="/assets/article.png" alt="Article">
-              <div class="pub-info">
-                <div class="pub-title">Isogeometric simulation of a derived stem cell engineered ventricle</div>
-                <div class="pub-authors">S. Botti, M. Torre</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal">Advances in Computational Science and Engineering, 2023</span>
-                  <a class="pdf-btn" href="https://www.aimsciences.org/article/doi/10.3934/acse.2023013" target="_blank">DOI</a>
-                  <a class="pdf-btn" href="/documents/IGA2023.pdf" target="_blank">PDF</a>
-                </div>
-              </div>
+            <div class="edu-row">
+            <img class="pub-icon" src="/assets/tocco.png" alt="Degree">
+            <div class="edu-info">
+                <div class="edu-year">July 2019</div>
+                <div class="edu-degree">Master in Mathematics</div>
+                <div class="edu-institution">University of Pavia</div>
+                <div class="edu-thesis">Thesis: Mathematical and numerical modeling of Human Induced Pluripotent
+                    Stem Cell-Derived Cardiomyocytes (hiPSC-CMs)</div>
+                <div class="edu-advisor">Advisor: Prof. Luca F. Pavarino</div>
             </div>
-            <!-- Altre pubblicazioni -->
-          </div>
-          <h3>Conference Proceedings and Book Chapter</h3>
-          <div class="pub-row">
-              <img class="pub-icon" src="/assets/article.png" alt="Article">
-              <div class="pub-info">
-                <div class="pub-title">Advanced Bidomain Framework for Drug Testing in Heterogeneous Cardiac hiPSC Tissues</div>
-                <div class="pub-authors">S. Botti, R. Krause, L.F. Pavarino</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal"> Cardiovascular Modeling, in Springer INdAM series <em>Accepted paper</em></span>
-                </div>
-                <!--<div class="pub-journal">Advances in Computational Science and Engineering, 2023</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <a class="pub-link" href="https://www.aimsciences.org/article/doi/10.3934/acse.2023013" target="_blank">DOI: 10.3934/acse.2023013</a>
-                  <a class="pub-link" href="/documents/IGA2023.pdf" target="_blank">PDF version</a>
-                </div>-->
-              </div>
             </div>
-            <div class="pub-row">
-              <img class="pub-icon" src="/assets/article.png" alt="Article">
-              <div class="pub-info">
-                <div class="pub-title">An in silico Study of Cardiac hiPSC Electronic Maturation by Dynamic Clamp</div>
-                <div class="pub-authors">S. Botti, C. Bartolucci, R. Krause, L.F. Pavarino, S. Severi</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal">Functional Imaging and Modeling of the Heart, 2023</span>
-                  <a class="pdf-btn" href="https://link.springer.com/chapter/10.1007/978-3-031-35302-4_18" target="_blank">DOI</a>
-                  <a class="pdf-btn" href="/documents/FIMH2023.pdf" target="_blank">PDF</a>
-                </div>
-                </div>
+            <!-- Altre lauree o corsi -->
+            <div class="edu-row">
+            <img class="pub-icon" src="/assets/tocco.png" alt="Degree">
+            <div class="edu-info">
+                <div class="edu-year">July 2017</div>
+                <div class="edu-degree">Master in Mathematics</div>
+                <div class="edu-institution">University of Pavia</div>
+                <div class="edu-thesis">Thesis: Dynamic Systems: Topological Equivalence and Examples of Bifurcations.</div>
+                <div class="edu-advisor">Advisor: Prof. Giuseppe Savaré</div>
             </div>
-            <div class="pub-row">
-              <img class="pub-icon" src="/assets/article.png" alt="Article">
-              <div class="pub-info">
-                <div class="pub-title">Numerical Simulations Indicate IK1 Dynamic Clamp Can Unveil the Phenotype of Cardiomyocytes Derived from Induced Pluripotent Stem Cells</div>
-                <div class="pub-authors">S. Botti, C. Bartolucci, C. Altomare, L. Barile, R. Krause, L.F. Pavarino, S. Severi</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal">Computing in Cardiology, 2022</span>
-                  <a class="pdf-btn" href="https://ieeexplore.ieee.org/document/10081686" target="_blank">DOI</a>
-                  <a class="pdf-btn" href="/documents/CinC2022.pdf" target="_blank">PDF</a>
-                </div>
-              </div>
+            </div>      
+            <div class="edu-row">
+            <img class="pub-icon" src="/assets/tocco.png" alt="Degree">
+            <div class="edu-info">
+                <div class="edu-year">June 2014</div>
+                <div class="edu-degree">Secondary School Certificate</div>
+                <div class="edu-institution">Lyceum Giovanni Gandini (Lodi)</div>
             </div>
-
-          <h3>Arxiv Preprints</h3>
-          <div class="pub-row">
-              <img class="pub-icon" src="/assets/article.png" alt="Article">
-              <div class="pub-info">
-                <div class="pub-title">A novel ionic model for matured and paced atrial-like hiPSC-CMs integrating IKur and IKCa currents</div>
-                <div class="pub-authors">S. Botti, C. Bartolucci, C. Altomare, L. Barile, R. Krause, L.F. Pavarino, S. Severi</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal">bioRxiv preprint</span>
-                  <a class="pdf-btn" href="https://www.biorxiv.org/content/10.1101/2024.01.12.574782v1" target="_blank">DOI</a>
-                  <a class="pdf-btn" href="/documents/bioRxiv.pdf" target="_blank">PDF</a>
-                </div>
-              </div>
-            </div>
-          <div>
-          <h3>PhD Thesis</h3>
-          <div class="pub-row">
-              <img class="pub-icon" src="/assets/article.png" alt="Article">
-              <div class="pub-info">
-                <div class="pub-title">Mathematical modeling of Human Induced Pluripotent Stem Cell-Derived Cardiomyocytes (hiPSC-CMs): from ionic currents to 3D ventricle models</div>
-                <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal">S. Botti</span>
-                  <a class="pdf-btn" href="https://iris.unipv.it/handle/11571/1467309" target="_blank">DOI</a>
-                  <a class="pdf-btn" href="/documents/Botti_tesi.pdf" target="_blank">PDF</a>
-                </div>
-              </div>
-            </div>
+            </div>      
+        </div>
         </section>
+
+
+        <section id="funding">
+        <h2>Fundings and Grants</h2>
+        <div class="funding-card">
+        <div class="funding-info">
+            <div class="funding-text1">
+            Swiss National Science Foundation (SNSF), Postdoctoral Fellowship grant
+            </div>
+            <div class="funding-text2">
+            Cell-by-cell and bidomain models for cardiac derived stem cell tissue:
+            innovative numerical and deep learning tools for regenerative medicine
+            </div>
+            <div class="funding-text3">
+            2023–2025, Grant number: 217025, approx. 211 450 CHF
+            </div>
+        </div>
+        <div class="funding-logo">
+            <img src="/assets/SNF_logo.svg" alt="SNSF Logo">
+        </div>
+        </div>
+        </section>
+
 
         <section id="teaching">
           <h2>Teaching Activities</h2>
@@ -953,42 +1013,9 @@
           </ul>
         </section>
 
-        <section id="contact">
-          <h2>Contacts</h2>
-          <div class="contacts-columns">
-            <div class="contacts-col">
-              <ul class="contacts-list">
-                <li>
-                  <img src="/assets/mail.png" alt="Email" style="width:22px;height:22px;color: var(--muted);">
-                  <a href="mailto:bottiso@usi.ch">bottiso@usi.ch</a>
-                </li>
-                <li>
-                  <img src="/assets/linkedin.png" alt="LinkedIn" style="width:22px;height:22px;color: var(--muted);">
-                  <a href="https://www.linkedin.com/in/sofia-botti-594570280" target="_blank">LinkedIn: Sofia Botti</a>
-                </li>
-                <li>
-                  <img src="/assets/github.png" alt="GitHub" style="width:22px;height:22px;color: var(--muted);">
-                  <a href="https://github.com/bottiso" target="_blank">GitHub: bottiso</a>
-                </li>
-                <li>
-                  <img src="/assets/scholar.png" alt="Scholar" style="width:22px;height:22px;">
-                  <a href="https://scholar.google.com/citations?user=hcpBatQAAAAJ&hl=it" target="_blank">Google Scholar</a>
-                </li>
-              </ul>
-            </div>
-            <div class="contacts-col">
-              <div style="display: flex; align-items: flex-start; gap: 50px;">
-                <img src="/assets/posizione.png" alt="Location" style="width:35px;height:35px;margin-top:2px;">
-                <div class="contacts-address">
-                  Euler Institute,<br>
-                  Via La Santa 1,<br>
-                  6962 Viganello, Lugano, Switzerland<br>
-                  Room D5.13, fifth floor
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        
+        
+
       </main>
     </div>
   </div>
