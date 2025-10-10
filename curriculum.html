@@ -770,6 +770,61 @@
     }
 
 
+    
+    /* Sidebar (menu laterale) */
+    .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 240px;
+    height: 100%;
+    background: var(--card);
+    box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    gap: 20px;
+    transition: left 0.3s ease;
+    z-index: 200;
+    }
+
+    .sidebar.show {
+    left: 0;
+    }
+
+    .sidebar-link {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 24px;
+    transition: background 0.2s;
+    }
+
+    .sidebar-link:hover {
+    background: rgba(255,255,255,0.12);
+    }
+
+    /* Assicura che il pulsante hamburger sia sempre visibile sopra */
+    .menu-toggle {
+    position: fixed;
+    top: 15px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 300;
+    }
+
+    @media (min-width: 701px) {
+    .menu-toggle,
+    .sidebar {
+        display: none;
+    }
+    }
+
+
 
   </style>
 
@@ -1046,4 +1101,31 @@
   </footer>
 
 </body>
+
+  
+<!-- Pulsante hamburger -->
+<button class="menu-toggle" id="menu-toggle">☰</button>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <a href="#about" class="sidebar-link">About</a>
+  <a href="#research" class="sidebar-link">Research</a>
+  <a href="#publications" class="sidebar-link">Publications</a>
+  <a href="#contact" class="sidebar-link">Contact</a>
+</div>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("sidebar");
+
+  menuToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("show");
+  });
+
+  document.querySelectorAll(".sidebar-link").forEach(link => {
+    link.addEventListener("click", () => sidebar.classList.remove("show"));
+  });
+</script>
+
+  
 </html>
