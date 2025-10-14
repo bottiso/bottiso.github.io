@@ -44,7 +44,7 @@
     .controls{margin-left:auto;display:flex;gap:8px}
     .btn{background:linear-gradient(90deg,rgba(255,255,255,0.04),transparent);border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:inherit;font-weight:600;cursor:pointer}
     .grid{display:block;margin-top:26px}
-    .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.02));padding:var(--content-pad);border-radius:var(--radius);box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+    .card{background:linear-gradient(180deg,var(--card),rgba(255, 255, 255, 0.5));padding:var(--content-pad);border-radius:var(--radius);box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
 
     /* left content */
     .section{margin-bottom:18px}
@@ -158,7 +158,7 @@
       margin-top: 18px;
     }
     .pub-card {
-      background: linear-gradient(90deg, var(--card), rgba(6,182,212,0.08));
+      background: linear-gradient(90deg, var(--card), rgba(27, 212, 6, 0.819));
       border-radius: 12px;
       padding: 18px 22px;
       box-shadow: 0 2px 12px rgba(2,6,23,0.10);
@@ -464,7 +464,6 @@
       font-size: 28px;
       color: #fff;
       cursor: pointer;
-      margin-left: auto;
     }
 
     @media (max-width: 700px) {
@@ -682,14 +681,27 @@
     }
 
     .funding-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    background: linear-gradient(90deg, var(--card), rgba(6,182,212,0.08));
-    padding: 16px 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+        position: relative; /* necessario per posizionare ::before */
+        display: flex;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        background: linear-gradient(90deg, var(--card), rgba(6,182,212,0.08));
+        padding: 16px 20px 16px 28px; /* spazio extra a sinistra per la barra */
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+    }
+
+    .funding-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 6px; /* spessore della barra */
+        height: 100%;
+        border-radius: 12px 0 0 12px; /* arrotondato solo sul lato sinistro */
+        background: linear-gradient(180deg, var(--accent1), var(--accent2));
     }
 
     .funding-text1 {
@@ -725,6 +737,68 @@
     flex: 1;
     gap: 4px;
     }
+
+
+
+
+    #Events {
+    margin-top: 24px;
+    }
+
+    .event-card {
+      position: relative; /* necessario per posizionare ::before */
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: linear-gradient(90deg, var(--card), rgba(6,182,212,0.08));
+      padding: 16px 20px 16px 28px; /* spazio extra a sinistra per la barra */
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+    }
+
+    .event-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 6px; /* spessore della barra */
+        height: 100%;
+        border-radius: 12px 0 0 12px; /* arrotondato solo sul lato sinistro */
+        background: linear-gradient(180deg, var(--accent1), var(--accent2));
+    }
+
+    .event-text1 {
+      flex: 1; /* occupa la maggior parte della card */
+      font-size: 15px;
+      color: #fff;
+      line-height: 1.4;
+      font-weight:1000;
+    }
+    .event-text2 {
+      flex: 1; /* occupa la maggior parte della card */
+      font-size: 15px;
+      color: #fff;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .event-text3 {
+      flex: 1; /* occupa la maggior parte della card */
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+
+    /* contenitore del testo */
+    .event-info {
+      display: flex;
+      flex-direction: column; /* testo uno sotto l’altro */
+      flex: 1;
+      gap: 4px;
+    }
+
 
     /* --- Responsive: nascondi logo su schermi piccoli --- */
     @media (max-width: 768px) {
@@ -804,7 +878,7 @@
     background: rgba(255,255,255,0.12);
     }
 
-    /* Assicura che il pulsante hamburger sia sempre visibile sopra */
+    /* Assicura che il pulsante hamburger sia sempre visibile sopra 
     .menu-toggle {
     position: fixed;
     top: 15px;
@@ -815,6 +889,17 @@
     color: #fff;
     cursor: pointer;
     z-index: 300;
+    } */
+     .menu-toggle {
+      position: fixed;
+      top: 15px;
+      left: 18px; /* ✅ Sposta il bottone a sinistra */
+      background: none;
+      border: none;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 300;
     }
 
     @media (min-width: 701px) {
@@ -849,6 +934,7 @@
         <a class="nav-link" href="#education">Education</a>
         <a class="nav-link" href="#funding">Funding</a>
         <a class="nav-link" href="#teaching">Teaching</a>
+        <a class="nav-link" href="#Events">Events</a>
       </div>
       <button class="menu-toggle" aria-label="Toggle menu">☰</button>
       <div class="nav-icons">
@@ -880,7 +966,7 @@
   
   <div class="wrap">
     <header class="hero-header">
-    <img src="/assets/avatar.jpg" alt="Sofia Botti" class="hero-img">
+    <img src="/assets/avatar3.png" alt="Sofia Botti" class="hero-img">
     <div class="hero-info">
         <h1>Sofia Botti</h1>
         <div class="hero-role">Curriculum Vitae</div>
@@ -994,6 +1080,19 @@
             <img src="/assets/SNF_logo.svg" alt="SNSF Logo">
         </div>
         </div>
+        <div class="funding-card">
+        <div class="funding-info">
+            <div class="funding-text1">
+            Travel grant
+            </div>
+            <div class="funding-text2">
+            Travel Grant for the Cardiac Physiome Workshop 2024
+            </div>
+            <div class="funding-text3">
+            09/2024, 500€
+            </div>
+        </div>
+        </div>
         </section>
 
 
@@ -1066,6 +1165,37 @@
               </div>
             </li>
           </ul>
+        </section>
+
+
+        <section id="Events">
+        <h2>Organization of Conferences and Events</h2>
+        <div class="event-card">
+        <div class="event-info">
+            <div class="event-text1">
+            Intensive Summer School
+            </div>
+            <div class="event-text2">
+            Intensive Summer School on Computational Cardiology: theory, applications and new trends
+            </div>
+            <div class="event-text3">
+            06/2025, University of Milan
+            </div>
+        </div>
+        </div>
+        <div class="event-card">
+        <div class="event-info">
+            <div class="event-text1">
+            ICAM Workshop
+            </div>
+            <div class="event-text2">
+            International Center for Advanced Computing in Medicine
+            </div>
+            <div class="event-text3">
+            05/2024, Università della Svizzera Italiana
+            </div>
+        </div>
+        </div>
         </section>
 
         

@@ -398,7 +398,6 @@
       font-size: 28px;
       color: #fff;
       cursor: pointer;
-      margin-left: auto;
     }
 
     @media (max-width: 700px) {
@@ -671,7 +670,7 @@
     background: rgba(255,255,255,0.12);
     }
 
-    /* Assicura che il pulsante hamburger sia sempre visibile sopra */
+    /* Assicura che il pulsante hamburger sia sempre visibile sopra 
     .menu-toggle {
     position: fixed;
     top: 15px;
@@ -682,7 +681,19 @@
     color: #fff;
     cursor: pointer;
     z-index: 300;
+    }*/
+    .menu-toggle {
+      position: fixed;
+      top: 15px;
+      left: 18px; /* ✅ Sposta il bottone a sinistra */
+      background: none;
+      border: none;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 300;
     }
+
 
     @media (min-width: 701px) {
     .menu-toggle,
@@ -752,7 +763,10 @@
         <div class="hero-inst">Euler Institute, Università della Svizzera Italiana</div>
         <div class="hero-links">
           <a href="mailto:bottiso@usi.ch" title="Email">
-            <img src="/assets/mail.png" alt="Email">
+            <img src="/assets/mail.png" alt="Email"; style="width:32px; height:28px;">
+          </a>
+          <a href="https://www.researchgate.net/profile/Sofia-Botti-2?ev=hdr_xprf" target="_blank" title="LinkedIn">
+            <img src="/assets/researchgate.png" alt="LinkedIn">
           </a>
           <a href="https://www.linkedin.com/in/sofia-botti-594570280" target="_blank" title="LinkedIn">
             <img src="/assets/linkedin.png" alt="LinkedIn">
@@ -762,6 +776,9 @@
           </a>
           <a href="https://scholar.google.com/citations?user=hcpBatQAAAAJ&hl=it" target="_blank" title="Google Scholar">
             <img src="/assets/scholar.png" alt="Scholar">
+          </a>
+           <a href="https://orcid.org/0000-0002-7271-6943" target="_blank" title="Google Scholar">
+            <img src="/assets/orcid.png" alt="Scholar">
           </a>
         </div>
         <div class="cv-download">
