@@ -13,31 +13,91 @@
     :root{
       --bg:#070816; --card:#0b1220; --muted:#98a0b3; --accent1:#7c3aed; --accent2:#06b6d4; --glass: rgba(255,255,255,0.04);
       --radius:14px; --maxw:1100px; --content-pad:28px;
+      --text:#e6eef8; --heading:#ffffff; --soft-text:#cfe6ff; --link:#0586b6; --link-hover:#06b6d4;
+      --button-border: rgba(255,255,255,0.18); --bg-glow-1: rgba(124,58,237,0.12); --bg-glow-2: rgba(6,182,212,0.08);
     }
-    /* ===== Tema Chiaro ===== */
     body.light-theme {
-      --bg: #f4f3ef;
-      --card: #ffffffd9;
-      --muted: #4a4f5e;
-      --accent1: #6b21a8;
-      --accent2: #0e7490;
-      color: #08132b;
-      background: #f4f3ef;
+      --bg:#edf4ff; --card:rgba(255,255,255,0.88); --muted:#486581; --accent1:#1d4ed8; --accent2:#0f7abf;
+      --glass: rgba(19, 32, 63, 0.06); --text:#131a73; --heading:#131a73; --soft-text:#24476b;
+      --link:#0b63a5; --link-hover:#0a4f85; --button-border: rgba(22,50,79,0.18);
+      --bg-glow-1: rgba(29,78,216,0.12); --bg-glow-2: rgba(14,165,233,0.12);
+      color: var(--text);
     }
 
-
-    /* piccoli aggiustamenti per componenti */
-    body.light-theme .funding-card {
-      background: linear-gradient(90deg, var(--card), rgba(14,116,144,0.08));
-      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    body.light-theme .top-header,
+    body.light-theme .sidebar {
+      background: rgba(237,244,255,0.92);
+      box-shadow: 0 10px 30px rgba(37,99,235,0.12);
     }
 
+    body.light-theme .card,
+    body.light-theme .research-box,
+    body.light-theme .pub-card,
+    body.light-theme .funding-card,
+    body.light-theme .event-card {
+      box-shadow: 0 10px 30px rgba(37,99,235,0.12);
+      border: 1px solid rgba(15,122,191,0.08);
+    }
+
+    body.light-theme .nav-link,
+    body.light-theme .hero-info h1,
+    body.light-theme .pub-title,
+    body.light-theme .teaching-course,
+    body.light-theme .funding-text1,
+    body.light-theme .funding-text2,
+    body.light-theme .event-text1,
+    body.light-theme .event-text2,
+    body.light-theme .cv-btn,
+    body.light-theme .menu-toggle,
+    body.light-theme #themeToggle,
+    body.light-theme .sidebar-link {
+      color: var(--heading);
+    }
+
+    body.light-theme .small,
+    body.light-theme .contacts-address,
+    body.light-theme .contacts-list a {
+      color: var(--soft-text) !important;
+    }
+
+    body.light-theme .pub-link,
+    body.light-theme .pdf-btn,
+    body.light-theme .teaching-type,
+    body.light-theme .pub-journal,
+    body.light-theme .research-title,
     body.light-theme a.link {
-      color: var(--accent2);
-      border-bottom-color: transparent;
+      color: var(--link);
     }
+
+    body.light-theme .pub-link:hover,
+    body.light-theme .pdf-btn:hover,
     body.light-theme a.link:hover {
-      border-bottom-color: var(--accent2);
+      color: var(--link-hover);
+    }
+
+    body.light-theme .nav-link:hover,
+    body.light-theme .sidebar-link:hover {
+      background: rgba(15,122,191,0.12);
+    }
+
+    body.light-theme .nav-icons img,
+    body.light-theme .hero-links a img,
+    body.light-theme .teaching-icon,
+    body.light-theme .pub-icon,
+    body.light-theme .cv-icon {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    body.light-theme .cv-btn {
+      background: rgba(255,255,255,0.64);
+      border-color: var(--button-border);
+    }
+
+    body.light-theme .cv-btn:hover {
+      background: linear-gradient(90deg, #053994, #1e80db);
+      color: #ffffff;
+      border-color: transparent;
     }
 
     *{box-sizing:border-box}
@@ -53,8 +113,8 @@
     body {
       margin: 0;
       font-family: Inter, system-ui, Segoe UI, Roboto, helvetica, Arial;
-      background: rgb(9, 1, 31); /* sfondo tinta unita */
-      color: #e6eef8;
+      background: var(--bg);
+      color: var(--text);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       line-height: 1.5;
@@ -80,7 +140,7 @@
     .item{display:grid;grid-template-columns:180px 2fr;gap:12px}
     .item .when{color:var(--muted);font-size:18px}
     .role{font-weight:800;font-size:18px}
-    .small{font-size:15px;color:#cfe6ff}
+    .small{font-size:15px;color:var(--soft-text)}
 
     /* right column quick info */
     /*.meta-list{display:flex;flex-direction:column;gap:12px}
@@ -174,7 +234,7 @@
       height: 18px;
       width: 18px;
       border-radius: 50%;
-      background: var(--bg);
+      background: transparent;
     }
 
     .pub-list {
@@ -408,7 +468,7 @@
       width: 28px;
       height: 28px;
       border-radius: 6px;
-      background: var(--bg);
+      background: transparent;
       transition: box-shadow 0.2s;
     }
     .hero-links a img:hover {
@@ -660,22 +720,34 @@
       filter: invert(1); /* rende l’icona bianca se è nera */
     }
 
-
     /* Bottone cambio tema */
     #themeToggle {
+      margin-left: 12px;
       border: none;
-      color: #fff;
+      background: transparent;
+      color: var(--heading);
       font-weight: 700;
-      font-size: 10px;      /* 👈 cambia tu la dimensione */
-      padding: 8px 14px;    /* 👈 regola tu lo spazio interno */
-      border-radius: 10px;
+      font-size: 13px;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 0;
       cursor: pointer;
-      box-shadow: 0 2px 10px rgba(2,6,23,0.2);
-      transition: transform 0.2s, background 0.3s;
+      box-shadow: none;
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #themeToggle img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
     }
     #themeToggle:hover {
       transform: translateY(-2px);
-      background: linear-gradient(90deg, var(--accent2), var(--accent1));
+      background: transparent;
     }
 
     /* Su schermi piccoli: sposta il bottone a destra */
@@ -763,9 +835,11 @@
   const toggleButton = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
 
-  toggleButton.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-  });
+  if (toggleButton && navLinks) {
+    toggleButton.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  }
 </script>
 
 
@@ -773,22 +847,64 @@
 document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById('themeToggle');
   const body = document.body;
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+  const themeImages = Array.from(document.querySelectorAll('img[src*=".png"]'));
 
-  // Controlla la preferenza salvata
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'light') {
-    body.classList.add('light-theme');
-  } else {
+  const toBlueVariant = (src) => {
+    const [path, query = ''] = src.split('?');
+    if (!path.endsWith('.png')) return src;
+    if (path.endsWith('_blu.png')) return src;
+    const next = path.replace(/\.png$/, '_blu.png');
+    return query ? `${next}?${query}` : next;
+  };
+
+  const applyThemeImages = (isLight) => {
+    themeImages.forEach((img) => {
+      if (!img.dataset.darkSrc) {
+        img.dataset.darkSrc = img.getAttribute('src') || '';
+      }
+
+      const darkSrc = img.dataset.darkSrc;
+      if (!darkSrc.includes('.png')) return;
+
+      if (isLight) {
+        const blueSrc = img.dataset.blueSrc || toBlueVariant(darkSrc);
+        img.onerror = () => {
+          img.onerror = null;
+          img.src = darkSrc;
+        };
+        img.src = blueSrc;
+      } else {
+        img.onerror = null;
+        img.src = darkSrc;
+      }
+    });
+  };
+
+  const applyTheme = (theme) => {
+    const isLight = theme === 'light';
+    body.classList.toggle('light-theme', isLight);
+    applyThemeImages(isLight);
+
+    if (toggleBtn) {
+      toggleBtn.setAttribute('aria-label', isLight ? 'Switch to night mode' : 'Switch to day mode');
+      toggleBtn.setAttribute('title', isLight ? 'Passa alla modalita notte' : 'Passa alla modalita giorno');
+    }
+
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', isLight ? '#edf4ff' : '#0f172a');
+    }
+
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  };
+
+  applyTheme(localStorage.getItem('theme') === 'light' ? 'light' : 'dark');
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      applyTheme(body.classList.contains('light-theme') ? 'dark' : 'light');
+    });
   }
-
-  // Toggle tema al click
-  toggleBtn.addEventListener('click', () => {
-    const isLight = body.classList.toggle('light-theme');
-    if (isLight) {
-      localStorage.setItem('theme', 'light');
-    } else {
-      localStorage.setItem('theme', 'dark');    }
-  });
 });
 </script>
 
@@ -825,13 +941,15 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="/assets/scholar.png" alt="Scholar" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
         </a>
         <a href="https://orcid.org/0000-0002-7271-6943" target="_blank" title="ORCID">
-          <img src="/assets/orcid.png" alt="ORCID" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+          <img src="/assets/orcid.png" data-blue-src="/assets/orcid_blu.png" alt="ORCID" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
         </a>
         <!--<a href="/documents/CV.pdf" target="_blank" title="CV">
           <img src="/assets/cv.png" alt="CV" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
         </a>-->
       </div>
-      <!--<button id="themeToggle" class="btn">🌓 </button>-->
+      <button id="themeToggle" type="button" aria-label="Switch theme" title="Passa tema">
+        <img src="/assets/luna.png" alt="Tema">
+      </button>
     </nav>
   </header>
   <div class="wrap">
@@ -839,8 +957,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <img src="/assets/avatar.jpg" alt="Sofia Botti" class="hero-img">
       <div class="hero-info">
         <h1>Sofia Botti</h1>
-        <div class="hero-role">Postdoctoral Researcher</div>
-        <div class="hero-inst">Euler Institute, Università della Svizzera Italiana</div>
+        <div class="hero-role">Contract Researcher</div>
+        <div class="hero-inst">MOX, Department of Mathematics, Politecnico di Milano</div>
         <div class="hero-links">
           <a href="mailto:sofia.botti@polimi.it" title="Email">
             <img src="/assets/mail.png" alt="Email"; style="width:32px; height:28px;">
@@ -858,7 +976,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="/assets/scholar.png" alt="Scholar">
           </a>
            <a href="https://orcid.org/0000-0002-7271-6943" target="_blank" title="Google Scholar">
-            <img src="/assets/orcid.png" alt="Scholar">
+            <img src="/assets/orcid.png" data-blue-src="/assets/orcid_blu.png" alt="Scholar">
           </a>
         </div>
         <div class="cv-download">
@@ -941,7 +1059,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="pub-authors">S. Botti, R. Krause, L.F. Pavarino</div>
                 <div style="display: flex; align-items: center; gap: 18px;">
                   <span class="pub-journal">Journal of Physiology, 2025</span>
-                  <a class="pdf-btn" href="https://arxiv.org/abs/1234.5678" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="https://physoc.onlinelibrary.wiley.com/doi/10.1113/JP287276" target="_blank">DOI</a>
                   <a class="pdf-btn" href="/documents/JP2025.pdf" target="_blank">PDF</a>
                 </div>        
               </div>
