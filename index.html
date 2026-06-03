@@ -603,8 +603,8 @@
 
     .research-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 6px;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 14px;
       justify-items: center;
       margin-top: 12px;
     }
@@ -618,30 +618,29 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
+      width: 100%;
+      max-width: 560px;
+      overflow: hidden;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .research-box:hover {
-      transform: translateY(-4px);
       box-shadow: 0 6px 24px rgba(6,182,212,0.3);
     }
 
     .research-img {
       width: 100%;
-      max-width: 400px;
-      height: 220px;
-      object-fit: cover;
-      object-position: left center; /* <-- Qui: immagine coperta da destra verso sinistra */
+      max-width: 100%;
+      height: auto;
       border-radius: 14px;
       box-shadow: 0 3px 12px rgba(6,182,212,0.2);
       margin-bottom: 16px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, object-position 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Piccolo effetto “riscaldamento” dinamico all’hover */
+    /* Hover: zoom leggero solo dell'immagine, senza spostare il box */
     .research-box:hover .research-img {
-      transform: scale(1.05);
-      object-position: right center; /* si sposta leggermente verso sinistra al passaggio del mouse */
+      transform: scale(1.03);
       box-shadow: 0 6px 18px rgba(6,182,212,0.3);
     }
 
@@ -1037,13 +1036,15 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="research-title">Ionic models for hiPSC-CMs</div>
             </div>
             <div class="research-box">
-              <img src="./assets/MEA.png" alt="Cardiac electrophysiology" class="research-img">
-              <div class="research-title">Cardiac electrophysiology</div>
+              <img src="./assets/MEA.png" alt="Electrophysiology of cardiac stem tissues" class="research-img">
+              <div class="research-title">Electrophysiology of cardiac stem tissues</div>
             </div>
+            <!--
             <div class="research-box">
               <img src="./assets/IGA.png" alt="Engineered heart tissue modeling" class="research-img">
               <div class="research-title">Engineered heart tissue modeling</div>
             </div>
+            -->
           </div>
         </section>
 
@@ -1097,7 +1098,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="pub-title">Advanced Bidomain Framework for Drug Testing in Heterogeneous Cardiac hiPSC Tissues</div>
                 <div class="pub-authors">S. Botti, R. Krause, L.F. Pavarino</div>
                 <div style="display: flex; align-items: center; gap: 18px;">
-                  <span class="pub-journal"> Cardiovascular Modeling, in Springer INdAM series <em>Accepted paper</em></span>
+                  <span class="pub-journal"> Trends in Mathematical and Numerical Modeling of the Cardiovascular System, in Springer INdAM series, <em>To appear</em></span>
                 </div>
                 <!--<div class="pub-journal">Advances in Computational Science and Engineering, 2023</div>
                 <div style="display: flex; align-items: center; gap: 18px;">
@@ -1132,6 +1133,21 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
           <h3>Arxiv Preprints</h3>
+          <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">A Correlation Analysis of Field Potential and Action
+Potential Biomarkers in Heterogeneous hiPSC-
+Derived Cardiac Tissues</div>
+                <div class="pub-authors">S. Botti, M. Favino, R. Krause, C. Altomare, L. Barile</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">Research Square preprint</span>
+                  <a class="pdf-btn" href="https://www.researchsquare.com/article/rs-9787691/v1" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/Research_Square.pdf" target="_blank">PDF</a>
+                </div>
+              </div>
+            </div>
+          <div>
           <div class="pub-row">
               <img class="pub-icon" src="/assets/article.png" alt="Article">
               <div class="pub-info">
@@ -1249,6 +1265,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 <li>
                   <img src="/assets/scholar.png" alt="Scholar" style="width:22px;height:22px;">
                   <a href="https://scholar.google.com/citations?user=hcpBatQAAAAJ&hl=it" target="_blank">Google Scholar</a>
+                </li>
+                <li>
+                  <img src="/assets/zoom.png" alt="Zoom" style="width:22px;height:22px;">
+                  <a href="https://polimi-it.zoom.us/my/bottiso" target="_blank">Personal Zoom Room</a>
                 </li>
               </ul>
             </div>
