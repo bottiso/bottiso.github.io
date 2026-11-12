@@ -1,0 +1,1133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Numerical methods for cardiac tissue modeling — Sofia Botti</title>
+  <meta name="description" content="Sofia Botti — Postdoctoral Researcher in Computational Mathematics. Modeling of cardiac tissue, ionic models, and deep learning tools for regenerative medicine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fraunces:opsz,wght@8..144,700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0f172a">
+  <style>
+    :root{
+      --bg:#070816; --card:#0b1220; --muted:#98a0b3; --accent1:#7c3aed; --accent2:#06b6d4; --glass: rgba(255,255,255,0.04);
+      --radius:14px; --maxw:1100px; --content-pad:28px;
+      --text:#e6eef8; --heading:#ffffff; --soft-text:#cfe6ff; --link:#0586b6; --link-hover:#06b6d4;
+      --button-border: rgba(255,255,255,0.18); --bg-glow-1: rgba(124,58,237,0.12); --bg-glow-2: rgba(6,182,212,0.08);
+    }
+    body.light-theme {
+      --bg:#edf4ff; --card:rgba(255,255,255,0.88); --muted:#486581; --accent1:#1d4ed8; --accent2:#0f7abf;
+      --glass: rgba(19, 32, 63, 0.06); --text:#131a73; --heading:#131a73; --soft-text:#24476b;
+      --link:#0b63a5; --link-hover:#0a4f85; --button-border: rgba(22,50,79,0.18);
+      --bg-glow-1: rgba(29,78,216,0.12); --bg-glow-2: rgba(14,165,233,0.12);
+      color: var(--text);
+    }
+
+    body.light-theme .top-header,
+    body.light-theme .sidebar {
+      background: rgba(237,244,255,0.92);
+      box-shadow: 0 10px 30px rgba(37,99,235,0.12);
+    }
+
+    body.light-theme .card,
+    body.light-theme .research-box,
+    body.light-theme .pub-card,
+    body.light-theme .funding-card,
+    body.light-theme .event-card {
+      box-shadow: 0 10px 30px rgba(37,99,235,0.12);
+      border: 1px solid rgba(15,122,191,0.08);
+    }
+
+    body.light-theme .nav-link,
+    body.light-theme .hero-info h1,
+    body.light-theme .pub-title,
+    body.light-theme .teaching-course,
+    body.light-theme .funding-text1,
+    body.light-theme .funding-text2,
+    body.light-theme .event-text1,
+    body.light-theme .event-text2,
+    body.light-theme .cv-btn,
+    body.light-theme .menu-toggle,
+    body.light-theme #themeToggle,
+    body.light-theme .sidebar-link {
+      color: var(--heading);
+    }
+
+    body.light-theme .small,
+    body.light-theme .contacts-address,
+    body.light-theme .contacts-list a {
+      color: var(--soft-text) !important;
+    }
+
+    body.light-theme .pub-link,
+    body.light-theme .pdf-btn,
+    body.light-theme .teaching-type,
+    body.light-theme .pub-journal,
+    body.light-theme .research-title,
+    body.light-theme a.link {
+      color: var(--link);
+    }
+
+    body.light-theme .pub-link:hover,
+    body.light-theme .pdf-btn:hover,
+    body.light-theme a.link:hover {
+      color: var(--link-hover);
+    }
+
+    body.light-theme .nav-link:hover,
+    body.light-theme .sidebar-link:hover {
+      background: rgba(15,122,191,0.12);
+    }
+
+    body.light-theme .nav-icons img,
+    body.light-theme .hero-links a img,
+    body.light-theme .teaching-icon,
+    body.light-theme .pub-icon,
+    body.light-theme .cv-icon {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    body.light-theme .cv-btn {
+      background: rgba(255,255,255,0.64);
+      border-color: var(--button-border);
+    }
+
+    body.light-theme .cv-btn:hover {
+      background: linear-gradient(90deg, #053994, #1e80db);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    /*body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,helvetica,Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent), radial-gradient(900px 400px at 90% 90%, rgba(6,182,212,0.04), transparent), var(--bg); color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,helvetica,Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent), radial-gradient(900px 400px at 90% 90%, rgba(124,58,237,0.08), transparent), var(--bg); color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }*/
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Segoe UI, Roboto, helvetica, Arial;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+    }
+    .wrap{max-width:var(--maxw); margin:24px auto; padding:20px 42px 0 42px}
+    .header{display:flex;align-items:center;gap:20px}
+    .avatar{width:550px;height:550px;border-radius:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;font-family:Fraunces,serif;color:white;font-size:50;box-shadow:0 8px 30px rgba(2,6,23,.6)}
+    .hero{display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:12px;text-align:center}
+    h1{margin-left:auto;margin-right:auto;font-family:Fraunces,serif;font-weight:700;font-size:35px;text-align:center}
+    p.lead{margin:0;color:var(--muted);font-size:20px}
+    .position{font-size:20px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:8px}
+
+    .controls{margin-left:auto;display:flex;gap:8px}
+    .btn{background:linear-gradient(90deg,rgba(255,255,255,0.04),transparent);border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:inherit;font-weight:600;cursor:pointer}
+    .grid{display:block;margin-top:26px}
+    .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.02));padding:var(--content-pad);border-radius:var(--radius);box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+
+    /* left content */
+    .section{margin-bottom:18px}
+    .section h2{margin:0 0 8px 0;font-size:25}
+    .muted{color:var(--muted);font-size:18px}
+    .timeline{display:flex;flex-direction:column;gap:12px}
+    .item{display:grid;grid-template-columns:180px 2fr;gap:12px}
+    .item .when{color:var(--muted);font-size:18px}
+    .role{font-weight:800;font-size:18px}
+    .small{font-size:15px;color:var(--soft-text)}
+
+    /* right column quick info */
+    /*.meta-list{display:flex;flex-direction:column;gap:12px}
+    .meta{display:flex;gap:10px;align-items:center}
+    .meta b{min-width:85px;color:#fff}
+    .pill{padding:6px 8px;border-radius:10px;background:var(--glass);display:inline-block;font-size:13px}
+    
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:8px;font-size:13px}
+    */
+    footer {
+      width: 100%;
+      border-bottom: none;
+      border-top: 2px solid var(--accent2); /* bordo in alto del footer */
+      margin-top: 40px;
+      padding-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* responsive 
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .controls{display:none}
+    }
+    */
+
+    /* subtle animated underline for links */
+    a.link{color:inherit;text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
+    a.link:hover{border-bottom-color:var(--accent2)}
+
+    /* timeline bar */
+    .timeline::before{content:'';width:2px;background:linear-gradient(180deg,var(--accent1),var(--accent2));position:relative;left:54px;top:0;height:100%;display:block}
+    .item{position:relative;padding-left:15px}
+    .item::before{content:none !important}
+
+    /* fancy hero badge */
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,rgba(124,58,237,0.12),transparent);font-weight:700;font-size:13px}
+
+    /* download button */
+    .cta{display:inline-flex;gap:10px;align-items:center;padding:12px 16px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:white;font-weight:700;cursor:pointer}
+
+    /* small utilities */
+    .contact-icons{display:flex;gap:10px;align-items:center}
+    .icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.03);display:inline-flex;align-items:center;justify-content:center}
+
+    .top-header {
+      width: 100%;
+      background: var(--bg);
+      box-shadow: 0 2px 12px rgba(2, 6, 23, 0.10);
+      margin-bottom: 5pt;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: right;
+      justify-content: space-between; /* separa links e icone */
+      padding: 15px 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-link {
+      color: #fff;
+      font-weight: 400;
+      text-decoration: none;
+      font-size: 15px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: right;
+      gap: 18px;
+      margin-left: auto; /* spinge le icone a destra */
+      justify-content: flex-end; /* le tiene allineate a destra */
+    }
+
+    .nav-icons img {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .pub-card {
+      background: linear-gradient(90deg, var(--card), rgba(6,182,212,0.08));
+      border-radius: 12px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pub-icon {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: transparent; 
+      box-shadow: 0 1px 6px rgba(2,6,23,0.08);
+      margin-top: 15px;
+    }
+    .pub-title {
+      font-weight: 400;
+      font-size: 16px;
+    }
+    .pub-authors {
+      margin-top: 2px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+    
+    .pub-link {
+      align-self: flex-start;
+      margin-top: 2px;
+      font-size: 15px;
+      color: #0586b6;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+    .pub-link:hover {
+      margin-top: 2px;
+      color: #06b6d4;
+    }
+
+    .pub-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+      margin-top: 0px;
+    }
+    .pub-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: transparent; /*(90deg, var(--card), rgba(6,182,212,0.08));*/
+      border-radius: 10px;
+      padding: 2px 2px;
+      box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+    }
+    .pub-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .pub-link {
+      margin-top: 2px;
+    }
+
+    .pub-info > div {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .pub-journal {
+      font-size: 15px;
+      color: #06b6d4;
+      margin-top: 0;
+      white-space: nowrap;
+    }
+    
+    .pub-link {
+      margin-top: 0; /* rimuovi margine verticale */
+      white-space: nowrap; /* evita che il testo vada a capo */
+    }
+
+    .pdf-btn {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 8px;
+      background: transparent; /*(255,255,255,0.08);*/
+      color: #06b6d4;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      border: none; /*0.5px solid #06b6d4;*/
+      transition: background 0.2s;
+      margin-left: 0;
+    }
+    .pdf-btn:hover {
+      background: rgba(6,182,212,0.18);
+      color: #fff;
+    }
+ 
+    .teaching-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .teaching-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .teaching-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .teaching-details {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0 10px;
+      flex-wrap: wrap;
+      line-height: 1.2;
+    }
+    .teaching-year, .teaching-course, .teaching-type, .teaching-univ {
+      font-size: 16px;
+      line-height: 1.2;
+      color: var(--muted);
+      margin: 0;
+    }
+    .teaching-course {
+      font-weight: 700;
+      color: #fff;
+    }
+    .teaching-type {
+      color: #0586b6;
+    }
+
+    section {
+      margin-top: 60px;
+      margin-bottom: 48px;
+    }
+
+    .contacts-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .contacts-col {
+      flex: 1;
+    }
+
+    .contacts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contacts-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .contacts-address {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .contacts-list a {
+      color: var(--muted) !important;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .contacts-list a:hover {
+      color: var(--muted) !important;
+      text-decoration: underline;
+    }
+
+    .hero-header {
+      display: flex;
+      align-items: center;
+      gap: 100px; /* aumenta lo spazio tra foto e testo */
+      margin-bottom: 32px;
+    }
+
+    .hero-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* centra verticalmente */
+      gap: 0px; /* aumenta lo spazio tra le righe */
+      align-items: flex-start;
+      min-width: 320px;
+      font-size: 18px;
+    }
+
+    .hero-info h1 {
+      margin: 0;
+      font-size: 2.2em; /* più grande */
+      font-family: Fraunces, serif;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .hero-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: none; /*4px solid #06b6d4;*/
+      object-fit: cover;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(6,182,212,0.12);
+    }
+    .hero-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .hero-links a img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: transparent;
+      transition: box-shadow 0.2s;
+    }
+    .hero-links a img:hover {
+      box-shadow: 0 0 0 2px #06b6d4;
+    }
+
+    /* Hamburger menu base */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      .nav-bar {
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px 8px;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        background: var(--card);
+        width: 100vw;
+        flex-direction: column;
+        gap: 0;
+        z-index: 100;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .nav-icons {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .wrap {
+        padding: 10px 8px 0 8px;
+        max-width: 100vw;
+      }
+      .hero-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        text-align: center;
+      }
+      .hero-info {
+        align-items: center;
+        min-width: unset;
+        gap: 10px;
+      }
+      .hero-info h1 {
+        font-size: 2em;
+      }
+      .contacts-columns {
+        flex-direction: column;
+        gap: 18px;
+      }
+      .contacts-col {
+        min-width: unset;
+      }
+      .pub-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 8px 4px;
+      }
+      .pub-icon {
+        margin-top: 0;
+      }
+      .nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 8px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .nav-icons {
+        margin-left: 0;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-top: 8px;
+      }
+    }
+
+    @media (max-width: 700px) {
+    .pub-info > div {
+      flex-wrap: wrap;
+      gap: 8px 14px; /* spazio più compatto: righe e colonne */
+    }
+
+    .pub-journal {
+      flex-basis: 100%; /* forza il journal su una riga intera */
+      white-space: normal; /* permette l'andata a capo */
+    }
+
+    .pdf-btn {
+      flex: 0 0 auto; /* mantieni dimensione naturale */
+      margin-top: 0;
+    }
+
+    .pub-link {
+      white-space: normal; /* consente di spezzare anche link lunghi */
+    }
+  }
+
+
+    .research-img {
+      width: 100%;
+      max-width: 180px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 1px 8px rgba(124,58,237,0.10);
+      margin-bottom: 14px;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 14px;
+      justify-items: center;
+      margin-top: 12px;
+    }
+
+    .research-box {
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,0.03));
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(2,6,23,0.5);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 560px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .research-box[hidden] {
+      display: none;
+    }
+
+    .research-box:hover {
+      box-shadow: 0 6px 24px rgba(6,182,212,0.3);
+    }
+
+    .research-img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(6,182,212,0.2);
+      margin-bottom: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Hover: zoom leggero solo dell'immagine, senza spostare il box */
+    .research-box:hover .research-img {
+      transform: scale(1.03);
+      box-shadow: 0 6px 18px rgba(6,182,212,0.3);
+    }
+
+
+    .research-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #06b6d4;
+      margin-top: 4px;
+      margin-bottom: 0;
+      letter-spacing: 0.4px;
+    }
+
+    /* Layout per schermi piccoli 
+    @media (max-width: 700px) {
+      .research-box {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        padding: 12px 14px;
+        gap: 16px;
+      }
+
+      .research-img {
+        width: 60%;
+        height: auto;
+        margin-bottom: 0;
+      }
+
+      .research-title {
+        font-size: 17px;
+      }
+    }*/
+
+    @media (max-width: 700px) {
+      .item .when {
+        font-size: 14px;
+      }
+      .timeline::before {
+        left: 20px;
+      }
+      .item {
+        grid-template-columns: 100px 1fr;
+      }
+    }
+
+    .cv-download {
+      margin-top: 4px;
+      text-align: cnter; /* oppure center, se lo vuoi centrato */
+    }
+
+    .cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap:0px;
+      background: transparent /*90deg, #06b6d4, #0891b2)*/;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 0.5px solid #fff;
+      box-shadow: 0 2px 12px rgba(2,6,23,0.10);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .cv-btn:hover {
+      background: linear-gradient(90deg, #057794, #1ebfdb);
+      transform: translateY(-2px);
+    }
+
+    .cv-icon {
+      width: 18px;
+      height: 18px;
+      filter: invert(1); /* rende l’icona bianca se è nera */
+    }
+
+    /* Bottone cambio tema */
+    #themeToggle {
+      margin-left: 12px;
+      border: none;
+      background: transparent;
+      color: var(--heading);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 0;
+      cursor: pointer;
+      box-shadow: none;
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #themeToggle img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+    }
+    #themeToggle:hover {
+      transform: translateY(-2px);
+      background: transparent;
+    }
+
+    /* Su schermi piccoli: sposta il bottone a destra */
+    @media (max-width: 700px) {
+      #themeToggle {
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        z-index: 400;
+      }
+    }
+
+
+
+    
+    /* Sidebar (menu laterale) */
+    .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 240px;
+    height: 100%;
+    background: var(--card);
+    box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    gap: 20px;
+    transition: left 0.3s ease;
+    z-index: 200;
+    }
+
+    .sidebar.show {
+    left: 0;
+    }
+
+    .sidebar-link {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 24px;
+    transition: background 0.2s;
+    }
+
+    .sidebar-link:hover {
+      color: #06b6d4;
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* Assicura che il pulsante hamburger sia sempre visibile sopra 
+    .menu-toggle {
+    position: fixed;
+    top: 15px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 300;
+    }*/
+    .menu-toggle {
+      position: fixed;
+      top: 15px;
+      left: 18px; /* ✅ Sposta il bottone a sinistra */
+      background: none;
+      border: none;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 300;
+    }
+
+
+    @media (min-width: 701px) {
+    .menu-toggle,
+    .sidebar {
+        display: none;
+    }
+    }
+    
+  
+    /* research pages */
+    .back-link{display:inline-block;margin-bottom:6px;font-size:16px;color:var(--link);text-decoration:none}
+    .back-link:hover{color:var(--link-hover);text-decoration:underline}
+    .research-hero{display:flex;flex-direction:column;gap:18px;margin-bottom:8px}
+    .research-hero h1{margin:0;font-size:32px;color:var(--heading)}
+    .research-hero img{width:100%;max-width:560px;border-radius:14px;box-shadow:0 3px 12px rgba(6,182,212,0.2);display:block;align-self:center;margin:0 auto}
+    .research-text{font-size:18px;line-height:1.55;color:var(--text);margin:0}
+    .collab-list{list-style:none;padding:0;margin:0}
+    .collab-list li{margin-bottom:6px;font-size:17px;color:var(--muted)}
+    .collab-list b{color:var(--text);font-weight:600}
+    .research-box-link{text-decoration:none;color:inherit;display:flex;justify-content:center;width:100%}
+    .research-box-link .research-box{cursor:pointer}
+    .logo-row{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin:18px 0 6px}
+    .logo-chip{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:10px 16px;box-shadow:0 2px 10px rgba(2,6,23,0.25)}
+    .logo-chip img{display:block;width:auto;max-width:100%}
+    .logo-caption{font-size:15px;color:var(--muted);margin:4px 0 0}
+    .logo-caption a{color:var(--link)}
+    .logo-caption a:hover{color:var(--link-hover)}
+
+    /* research pages: slightly smaller type */
+    .wrap .research-text{font-size:16px;line-height:1.55}
+    .wrap .collab-list li{font-size:15px}
+    .wrap .logo-caption{font-size:14px}
+    .wrap .pub-title{font-size:15px}
+    .wrap .pub-authors,.wrap .pub-journal,.wrap .pdf-btn{font-size:14px}
+    .wrap h2{font-size:22px}
+    .wrap h3{font-size:17px}
+    .research-hero h1{font-size:28px}
+    .logo-chip.dark{background:#0f172a}
+
+    /* link colour (no blue) */
+    :root{--plink:#c4b5fd;--plink-hover:#ffffff}
+    body.light-theme{--plink:#6d28d9;--plink-hover:#4c1d95}
+    .wrap a:not(.logo-chip),
+    body.light-theme .wrap a:not(.logo-chip),
+    body.light-theme .back-link,body.light-theme .pdf-btn,body.light-theme .pub-journal,
+    body.light-theme .logo-caption a{color:var(--plink)}
+    .wrap a:not(.logo-chip):hover,
+    body.light-theme .wrap a:not(.logo-chip):hover,
+    body.light-theme .back-link:hover,body.light-theme .pdf-btn:hover{color:var(--plink-hover)}
+    .wrap .pub-journal{color:var(--muted)}
+    .wrap .pdf-btn:hover{background:rgba(124,58,237,0.18)}
+    .wrap a.link,.wrap .research-text a{text-decoration:underline;text-underline-offset:3px}
+    .logo-row + .logo-caption{margin-top:10px}
+  </style>
+
+  
+
+
+<script>
+  // Flip to true to show the SciML research box
+  const SHOW_SCIML = false;
+  const scimlBox = document.getElementById('sciml-box');
+  if (scimlBox) scimlBox.hidden = !SHOW_SCIML;
+</script>
+
+<script>
+  const toggleButton = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (toggleButton && navLinks) {
+    toggleButton.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  }
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById('themeToggle');
+  const body = document.body;
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+  const themeImages = Array.from(document.querySelectorAll('img[src*=".png"]'));
+
+  const toBlueVariant = (src) => {
+    const [path, query = ''] = src.split('?');
+    if (!path.endsWith('.png')) return src;
+    if (path.endsWith('_blu.png')) return src;
+    const next = path.replace(/\.png$/, '_blu.png');
+    return query ? `${next}?${query}` : next;
+  };
+
+  const applyThemeImages = (isLight) => {
+    themeImages.forEach((img) => {
+      if (!img.dataset.darkSrc) {
+        img.dataset.darkSrc = img.getAttribute('src') || '';
+      }
+
+      const darkSrc = img.dataset.darkSrc;
+      if (!darkSrc.includes('.png')) return;
+
+      if (isLight) {
+        const blueSrc = img.dataset.blueSrc || toBlueVariant(darkSrc);
+        img.onerror = () => {
+          img.onerror = null;
+          img.src = darkSrc;
+        };
+        img.src = blueSrc;
+      } else {
+        img.onerror = null;
+        img.src = darkSrc;
+      }
+    });
+  };
+
+  const applyTheme = (theme) => {
+    const isLight = theme === 'light';
+    body.classList.toggle('light-theme', isLight);
+    applyThemeImages(isLight);
+
+    if (toggleBtn) {
+      toggleBtn.setAttribute('aria-label', isLight ? 'Switch to night mode' : 'Switch to day mode');
+      toggleBtn.setAttribute('title', isLight ? 'Passa alla modalita notte' : 'Passa alla modalita giorno');
+    }
+
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', isLight ? '#edf4ff' : '#0f172a');
+    }
+
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  };
+
+  applyTheme(localStorage.getItem('theme') === 'light' ? 'light' : 'dark');
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      applyTheme(body.classList.contains('light-theme') ? 'dark' : 'light');
+    });
+  }
+});
+</script>
+
+
+
+
+</head>
+<body>
+  <header class="top-header">
+    <nav class="nav-bar">
+      <div class="nav-links">
+        <!--<a class="nav-link" href="index.html#about">About</a>-->
+        <a class="nav-link" href="index.html#research">Research</a>
+        <a class="nav-link" href="index.html#publications">Publications</a>
+        <a class="nav-link" href="index.html#teaching">Teaching</a>
+        <a class="nav-link" href="index.html#contact">Contact</a>
+        <a class="nav-link" href="curriculum.html">Curriculum</a>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <div class="nav-icons">
+        <a href="mailto:sofia.botti@polimi.it" title="Email">
+          <img src="/assets/mail.png" alt="Email" style="height:22px;width:27px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://www.researchgate.net/profile/Sofia-Botti-2?ev=hdr_xprf" target="_blank" title="ResearchGate">
+          <img src="/assets/researchgate.png" alt="LinkedIn" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://github.com/bottiso" target="_blank" title="GitHub">
+          <img src="/assets/github.png" alt="LinkedIn" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://www.linkedin.com/in/sofia-botti-594570280" target="_blank" title="LinkedIn">
+          <img src="/assets/linkedin.png" alt="LinkedIn" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://scholar.google.com/citations?user=hcpBatQAAAAJ&hl=it" target="_blank" title="Google Scholar">
+          <img src="/assets/scholar.png" alt="Scholar" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <a href="https://orcid.org/0000-0002-7271-6943" target="_blank" title="ORCID">
+          <img src="/assets/orcid.png" data-blue-src="/assets/orcid_blu.png" alt="ORCID" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>
+        <!--<a href="/documents/CV.pdf" target="_blank" title="CV">
+          <img src="/assets/cv.png" alt="CV" style="height:22px;width:22px;vertical-align:middle;border-radius:4px;">
+        </a>-->
+      </div>
+      <button id="themeToggle" type="button" aria-label="Switch theme" title="Passa tema">
+        <img src="/assets/luna.png" alt="Tema">
+      </button>
+    </nav>
+  </header>
+  <div class="wrap">
+    <div class="research-hero">
+      <a class="back-link" href="index.html#research">&larr; Back to Research Interests</a>
+      <h1>Numerical methods for cardiac tissue modeling</h1>
+      <img src="/assets/research_numerics.png" alt="Numerical methods for cardiac tissue modeling">
+    </div>
+    <div class="grid">
+      <main>
+        <section id="description">
+          <p class="research-text">Cardiac tissue is described by multiscale systems of partial differential equations coupled with stiff ODE models of the cell membrane. Approximating them is demanding: the problem spans very different spatial and temporal scales, and the cost of a simulation quickly becomes the limiting factor for real applications such as drug testing on tissues derived from human induced pluripotent stem cells (hiPSC). I am interested in numerical methods that make these simulations accurate, stable and affordable.</p>
+          <p class="research-text">I work mainly with the bidomain and multi-electrode array (MEA) models of <a class="link" href="research-hipsc.html">hiPSC-derived cardiac tissue</a>. In my first works on this topic I used isogeometric analysis to simulate the electrical activity of a ventricle engineered from stem cell-derived tissue, together with M. Torre. More recently, within the same bidomain framework, I have been looking at the balance between accuracy and cost: with M. Favino I compared the full MEA model with surrogate approaches, and with S. Tonali and L. F. Pavarino I am developing hybrid and second-order IMEX time-stepping schemes that make MEA simulations of cell monolayers considerably cheaper.</p>
+          <p class="research-text">Together with R. Krause and L. F. Pavarino I also contributed a bidomain framework designed for drug testing in heterogeneous hiPSC tissues, where the numerical method has to be efficient enough to explore many tissue compositions and drug effects.</p>
+        </section>
+
+        <section id="funding">
+          <h2>Funding</h2>
+          <div class="logo-row">
+            <div class="logo-chip dark"><img src="/assets/SNF_logo.svg" alt="Swiss National Science Foundation" style="height:50px;"></div>
+          </div>
+          <p class="logo-caption">SNSF Postdoctoral Fellowship no. 217025 (Swiss National Science Foundation). PI: S. Botti.</p>
+        </section>
+
+        <section id="software">
+          <h2>Software</h2>
+          <p class="research-text">The isogeometric simulations were performed with <a href="https://www.nutils.org" target="_blank">Nutils</a>, a Python library for finite element and isogeometric analysis. The MEA bidomain simulations are run with our <a href="https://github.com/bottiso/MEA" target="_blank">MATLAB framework for MEA bidomain simulations</a>, developed together with M. Favino.</p>
+        </section>
+
+        <section id="collaborators">
+          <h2>Collaborators</h2>
+          <ul class="collab-list">
+            <li><b>Dr. Marco Favino</b>, Università della Svizzera italiana (USI)</li>
+            <li><b>Prof. Rolf Krause</b>, Università della Svizzera italiana (USI) and KAUST</li>
+            <li><b>Prof. Luca F. Pavarino</b>, University of Pavia</li>
+            <li><b>Sofia Tonali</b>, University of Pavia</li>
+            <li><b>Dr. Michele Torre</b>, University of Pavia</li>
+          </ul>
+        </section>
+
+        <section id="publications">
+          <h2>Publications</h2>
+          <h3>Journal Articles</h3>
+          <div class="pub-table">
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">A Numerical Comparison of Multi-Electrode Array Model and Surrogate Approaches for Derived Cardiac Tissues</div>
+                <div class="pub-authors">S. Botti, M. Favino</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal"><em>Under review</em></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3>Conference Proceedings and Book Chapters</h3>
+          <div class="pub-table">
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">Efficient Hybrid IMEX Schemes for Modeling Multi-Electrode Arrays in Stem Cell-Derived Cardiac Tissue</div>
+                <div class="pub-authors">S. Tonali, C. Altomare, L. Barile, R. Krause, L. F. Pavarino, S. Botti</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">Submitted proceedings</span>
+                </div>
+              </div>
+            </div>
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">Advanced Bidomain Framework for Drug Testing in Heterogeneous Cardiac hiPSC Tissues</div>
+                <div class="pub-authors">S. Botti, R. Krause, L.F. Pavarino</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">Trends in Mathematical and Numerical Modeling of the Cardiovascular System, Springer INdAM series, <em>To appear</em></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3>Preprints</h3>
+          <div class="pub-table">
+            <div class="pub-row">
+              <img class="pub-icon" src="/assets/article.png" alt="Article">
+              <div class="pub-info">
+                <div class="pub-title">Second-Order IMEX Time-Stepping Methods for Efficient Bidomain Multi-Electrode Array Simulations of Cardiac Stem Cell Monolayers</div>
+                <div class="pub-authors">S. Tonali, S. Botti, L. F. Pavarino</div>
+                <div style="display: flex; align-items: center; gap: 18px;">
+                  <span class="pub-journal">arXiv preprint</span>
+                  <a class="pdf-btn" href="https://arxiv.org/abs/2609.12650" target="_blank">DOI</a>
+                  <a class="pdf-btn" href="/documents/arXiv_Tonali.pdf" target="_blank">PDF</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Sofia Botti, PhD
+  </footer>
+
+<button class="menu-toggle" id="menu-toggle">☰</button>
+<div id="sidebar" class="sidebar">
+  <a href="index.html" class="sidebar-link">Home</a>
+  <a href="#description" class="sidebar-link">Research</a>
+  <a href="#funding" class="sidebar-link">Funding</a>
+  <a href="#software" class="sidebar-link">Software</a>
+  <a href="#collaborators" class="sidebar-link">Collaborators</a>
+  <a href="#publications" class="sidebar-link">Publications</a>
+</div>
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("sidebar");
+  menuToggle.addEventListener("click", () => sidebar.classList.toggle("show"));
+  document.querySelectorAll(".sidebar-link").forEach(link => {
+    link.addEventListener("click", () => sidebar.classList.remove("show"));
+  });
+</script>
+</body>
+</html>

@@ -351,7 +351,7 @@
     }
     .teaching-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
       margin-bottom: 8px;
     }
@@ -359,16 +359,19 @@
       width: 18px;
       height: 18px;
       flex-shrink: 0;
+      margin-top: 1px;
     }
     .teaching-details {
       display: flex;
       flex-direction: row;
-      align-items: center;
-      gap: 10px;
+      align-items: baseline;
+      gap: 0 10px;
       flex-wrap: wrap;
+      line-height: 1.2;
     }
     .teaching-year, .teaching-course, .teaching-type, .teaching-univ {
       font-size: 16px;
+      line-height: 1.2;
       color: var(--muted);
       margin: 0;
     }
@@ -624,6 +627,10 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
+    .research-box[hidden] {
+      display: none;
+    }
+
     .research-box:hover {
       box-shadow: 0 6px 24px rgba(6,182,212,0.3);
     }
@@ -833,6 +840,13 @@
 
 
 <script>
+  // Flip to true to show the SciML research box
+  const SHOW_SCIML = false;
+  const scimlBox = document.getElementById('sciml-box');
+  if (scimlBox) scimlBox.hidden = !SHOW_SCIML;
+</script>
+
+<script>
   const toggleButton = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
 
@@ -1033,13 +1047,27 @@ document.addEventListener("DOMContentLoaded", () => {
         <section id="research">
           <h2>Research Interests</h2>
           <div class="research-grid">
-            <div class="research-box">
-              <img src="./assets/AL.png" alt="Ionic models for hiPSC-CMs" class="research-img">
-              <div class="research-title">Ionic models for hiPSC-CMs</div>
+            <a class="research-box-link" href="research-numerics.html">
+              <div class="research-box">
+              <img src="./assets/research_numerics.png" alt="Numerical methods for cardiac tissue modeling" class="research-img">
+              <div class="research-title">Numerical methods for cardiac tissue modeling</div>
             </div>
-            <div class="research-box">
-              <img src="./assets/MEA.png" alt="Electrophysiology of cardiac stem tissues" class="research-img">
-              <div class="research-title">Electrophysiology of cardiac stem tissues</div>
+            </a>
+            <a class="research-box-link" href="research-hipsc.html">
+              <div class="research-box">
+              <img src="./assets/MEA.png" alt="hiPSC-CMs: from ionic models to MEA simulations" class="research-img">
+              <div class="research-title">hiPSC-CMs: from ionic models to MEA simulations</div>
+            </div>
+            </a>
+            <a class="research-box-link" href="research-heart.html">
+              <div class="research-box">
+              <img src="./assets/research_heart.png" alt="Image-based whole-heart electrophysiology" class="research-img">
+              <div class="research-title">Image-based whole-heart electrophysiology</div>
+            </div>
+            </a>
+            <!-- Hidden until there is content: set SHOW_SCIML = true in the script below -->
+            <div class="research-box" id="sciml-box" hidden>
+              <div class="research-title">Scientific machine learning for cardiac electrophysiology</div>
             </div>
             <!--
             <div class="research-box">
@@ -1205,9 +1233,18 @@ document.addEventListener("DOMContentLoaded", () => {
             <li class="teaching-item">
               <img class="teaching-icon" src="/assets/accademia.png" alt="">
               <div class="teaching-details">
+                <span class="teaching-year">10/2026 – 09/2027</span>
+                <span class="teaching-course">Numerical Methods in Engineering Sciences</span>
+                <span class="teaching-type">(Faculty of Engineering, BSc)</span>
+                <span class="teaching-univ">Università degli Studi di Pavia, Pavia, Italy</span>
+              </div>
+            </li>
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
                 <span class="teaching-year">02/2026 – 07/2026</span>
                 <span class="teaching-course">Algorithmics</span>
-                <span class="teaching-type">(BSc)</span>
+                <span class="teaching-type">(Faculty of Mathematics, BSc)</span>
                 <span class="teaching-univ">FernUni-Unidistance, Brig, Switzerland</span>
               </div>
             </li>
@@ -1216,7 +1253,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="teaching-details">
                 <span class="teaching-year">08/2025 – 01/2026</span>
                 <span class="teaching-course">Algorithmics</span>
-                <span class="teaching-type">(BSc)</span>
+                <span class="teaching-type">(Faculty of Mathematics, BSc)</span>
                 <span class="teaching-univ">FernUni-Unidistance, Brig, Switzerland</span>
               </div>
             </li>

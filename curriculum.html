@@ -813,6 +813,14 @@
     line-height: 1.4;
     }
 
+
+    .funding-minor{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+    .funding-minor li{position:relative;display:flex;flex-direction:column;gap:1px;padding:8px 14px 8px 24px;border-radius:10px;background:linear-gradient(90deg,var(--card),rgba(6,182,212,0.04));box-shadow:0 1px 6px rgba(2,6,23,0.06);font-size:13px;line-height:1.4}
+    .funding-minor li::before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;border-radius:10px 0 0 10px;opacity:.6;background:linear-gradient(180deg,var(--accent1),var(--accent2))}
+    .funding-minor .fm-1{font-weight:700;color:var(--text)}
+    .funding-minor .fm-2{font-style:italic;color:var(--muted)}
+    .funding-minor .fm-3{color:var(--muted)}
+
     .funding-logo img {
     width: 250px; /* dimensione logo */
     height: auto;
@@ -887,6 +895,15 @@
       gap: 4px;
     }
 
+
+    /* toned-down look for events */
+    .event-card{margin-top:8px;padding:8px 14px 8px 24px;border-radius:10px;background:linear-gradient(90deg,var(--card),rgba(6,182,212,0.04));box-shadow:0 1px 6px rgba(2,6,23,0.06)}
+    .event-card::before{width:4px;border-radius:10px 0 0 10px;opacity:.6}
+    .event-info{gap:1px}
+    .event-text1,.event-text2,.event-text3{font-size:13px}
+    .event-text1{font-weight:700;color:var(--text)}
+    .event-text2{color:var(--muted)}
+    body.light-theme .event-text2{color:var(--muted)}
 
     /* --- Responsive: nascondi logo su schermi piccoli --- */
     @media (max-width: 768px) {
@@ -1285,19 +1302,23 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="/assets/SNF_logo.svg" alt="SNSF Logo">
         </div>
         </div>
-        <div class="funding-card">
-        <div class="funding-info">
-            <div class="funding-text1">
-            Travel grant
-            </div>
-            <div class="funding-text2">
-            Travel Grant for the Cardiac Physiome Workshop 2024
-            </div>
-            <div class="funding-text3">
-            09/2024, 500€
-            </div>
-        </div>
-        </div>
+        <ul class="funding-minor">
+            <li>
+                <div class="fm-1">GNCS – INdAM Research Project</div>
+                <div class="fm-2">Metodi numerici avanzati per la cardiologia computazionale personalizzata</div>
+                <div class="fm-3">Apr 2026 – Mar 2027, Role: CoPI, 1 800 €</div>
+            </li>
+            <li>
+                <div class="fm-1">Travel grant</div>
+                <div class="fm-2">Travel Grant for the Cardiac Physiome Workshop 2024</div>
+                <div class="fm-3">09/2024, 500 €</div>
+            </li>
+            <li>
+                <div class="fm-1">GNCS – INdAM Research Project</div>
+                <div class="fm-2">Modelli matematici e metodi numerici per la costruzione di gemelli digitali cardiaci</div>
+                <div class="fm-3">Apr 2023 – Mar 2024, Role: Participant, approx. 3 000 €</div>
+            </li>
+        </ul>
         </section>
 
 
@@ -1305,6 +1326,15 @@ document.addEventListener("DOMContentLoaded", () => {
           <h2>Teaching Activities</h2>
           <h3>Lecturer</h2>
           <ul class="teaching-list">
+            <li class="teaching-item">
+              <img class="teaching-icon" src="/assets/accademia.png" alt="">
+              <div class="teaching-details">
+                <span class="teaching-year">10/2026 – 09/2027</span>
+                <span class="teaching-course">Numerical Methods in Engineering Sciences</span>
+                <span class="teaching-type">(Faculty of Engineering, BSc)</span>
+                <span class="teaching-univ">Università degli Studi di Pavia, Pavia, Italy</span>
+              </div>
+            </li>
             <li class="teaching-item">
               <img class="teaching-icon" src="/assets/accademia.png" alt="">
               <div class="teaching-details">
